@@ -1,0 +1,259 @@
+[19-11-2019 07:14:33] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[19-11-2019 07:14:38] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[19-11-2019 07:14:39] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 401
+[19-11-2019 07:14:39] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 401 when accessing https://api.sandbox.paypal.com/v1/oauth2/token. {"error":"invalid_client","error_description":"Client Authentication failed"}
+[19-11-2019 07:39:47] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[19-11-2019 07:40:46] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[19-11-2019 07:45:20] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[19-11-2019 07:45:25] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 401
+[19-11-2019 07:45:25] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 401 when accessing https://api.sandbox.paypal.com/v1/oauth2/token. {"error":"invalid_client","error_description":"Client Authentication failed"}
+[19-11-2019 07:50:26] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[19-11-2019 07:51:36] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[19-11-2019 07:51:38] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[19-11-2019 07:51:39] PayPal\Core\PayPalHttpConnection : DEBUG: Request Headers 	: POST /v1/oauth2/token HTTP/1.1, Host: api.sandbox.paypal.com, User-Agent: PayPalSDK/PayPal-PHP-SDK 1.14.0 (platform-ver=7.1.9; bit=64; os=Windows_NT_6.1; machine=AMD64; crypto-lib-ver=1.0.2k; curl=7.55.0), Authorization: Basic QWZReGY2RnNsajctb2dTVTFta1VQd2U5XzFma0NrRkh5WVNKY3dtWWZmQ3ZPUjBQdFdrTG5EQmt5ckxHSmc4S1JRc0w4OEpUNWY4VWg0RFA6RUhxdDBHclJReG9CcktiU2VnLXo1VVhVZmZ0OGJVeE9ST0RqbW5IdG9kanVzdUFkU2ZCWGxtV2JoQkFTYmMyaFpsNWtmRjEtTmFhUzdNd3g=, Accept: */*, Content-Length: 29, Content-Type: application/x-www-form-urlencoded, , 
+[19-11-2019 07:51:39] PayPal\Core\PayPalHttpConnection : DEBUG: Request Data		: grant_type=client_credentials
+--------------------------------------------------------------------------------------------------------------------------------
+
+[19-11-2019 07:51:39] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 07:51:39] PayPal\Core\PayPalHttpConnection : DEBUG: Response Headers	: Cache-Control: max-age=0, no-cache, no-store, must-revalidate, Content-Length: 918, Content-Type: application/json, Date: Tue, 19 Nov 2019 07:52:09 GMT, Paypal-Debug-Id: 824d1adf2eb82, X-Paypal-Token-Service: IAAS, 
+[19-11-2019 07:51:39] PayPal\Core\PayPalHttpConnection : DEBUG: Response Data 	: {"scope":"https://uri.paypal.com/services/invoicing https://uri.paypal.com/services/disputes/read-buyer https://uri.paypal.com/services/payments/realtimepayment https://uri.paypal.com/services/disputes/update-seller https://uri.paypal.com/services/payments/payment/authcapture openid https://uri.paypal.com/services/disputes/read-seller https://uri.paypal.com/services/payments/refund https://api.paypal.com/v1/vault/credit-card https://api.paypal.com/v1/payments/.* https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.* https://uri.paypal.com/services/subscriptions https://uri.paypal.com/services/applications/webhooks","access_token":"A21AAFFYGSpnEf88I7wPDd5BiXCaIRTsTr-NNR3UCFtFP0fp6sCftl8yy-dwfe0l43cEmHJc78o-muA_ns6iobuXqZ_CvsFJQ","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":32400,"nonce":"2019-11-19T07:52:10ZP5oJ6wgGfk5Ia7Ob7VvOguUp9J-JuaeGv1MZXDECMrQ"}
+
+================================================================================================================================
+
+[19-11-2019 07:51:39] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/payments/payouts?sync_mode=true
+[19-11-2019 07:51:40] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[19-11-2019 07:51:41] PayPal\Core\PayPalHttpConnection : DEBUG: Request Headers 	: POST /v1/payments/payouts?sync_mode=true HTTP/1.1, Host: api.sandbox.paypal.com, Accept: */*, Content-Type: application/json, User-Agent: PayPalSDK/PayPal-PHP-SDK 1.14.0 (platform-ver=7.1.9; bit=64; os=Windows_NT_6.1; machine=AMD64; crypto-lib-ver=1.0.2k; curl=7.55.0), Authorization: Bearer A21AAFFYGSpnEf88I7wPDd5BiXCaIRTsTr-NNR3UCFtFP0fp6sCftl8yy-dwfe0l43cEmHJc78o-muA_ns6iobuXqZ_CvsFJQ, Content-Length: 276, , 
+[19-11-2019 07:51:41] PayPal\Core\PayPalHttpConnection : DEBUG: Request Data		: {"sender_batch_header":{"sender_batch_id":"5dd39f08a2d9a","email_subject":"You have a Payout!"},"items":[{"recipient_type":"Email","note":"Thanks for your patronage!","receiver":"7842437@gmail.com","sender_item_id":"2014031400023","amount":{"value":"1.00","currency":"USD"}}]}
+--------------------------------------------------------------------------------------------------------------------------------
+
+[19-11-2019 07:51:41] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[19-11-2019 07:51:41] PayPal\Core\PayPalHttpConnection : DEBUG: Response Headers	: Cache-Control: max-age=0, no-cache, no-store, must-revalidate, Content-Length: 346, Content-Type: application/json, Date: Tue, 19 Nov 2019 07:52:12 GMT, Paypal-Debug-Id: a87755efb6823, 
+[19-11-2019 07:51:41] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.sandbox.paypal.com/v1/payments/payouts?sync_mode=true. {"name":"SYNC_MODE_NOT_APPLICABLE","message":"Synchronous mode will soon be deprecated and is no longer available for new integrations. You can use the asynchronous mode by specifying sync_mode= false in the request.","debug_id":"a87755efb6823","information_link":"https://developer.paypal.com/docs/api/payments.payouts-batch/#errors","links":[]}
+[19-11-2019 07:51:41] PayPal\Core\PayPalHttpConnection : DEBUG: 
+
+================================================================================================================================
+
+[19-11-2019 07:55:13] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 07:55:15] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[19-11-2019 07:55:16] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 07:55:16] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payouts?sync_mode=true
+[19-11-2019 07:55:55] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 07:55:56] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[19-11-2019 07:55:58] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 07:55:58] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payouts?sync_mode=true
+[19-11-2019 07:55:59] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[19-11-2019 07:56:01] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[19-11-2019 07:56:01] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/payouts?sync_mode=true. {"name":"SYNC_MODE_NOT_APPLICABLE","message":"Synchronous mode will soon be deprecated and is no longer available for new integrations. You can use the asynchronous mode by specifying sync_mode= false in the request.","debug_id":"d6d50774c7a27","information_link":"https://developer.paypal.com/docs/api/payments.payouts-batch/#errors","links":[]}
+[19-11-2019 07:58:10] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 07:58:11] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[19-11-2019 07:58:12] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 07:58:12] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payouts?sync_mode=true
+[19-11-2019 07:58:13] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[19-11-2019 08:27:34] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 08:27:35] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[19-11-2019 08:27:37] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 08:27:37] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payouts?sync_mode=true
+[19-11-2019 08:27:38] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[19-11-2019 08:27:39] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[19-11-2019 08:27:39] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/payouts?sync_mode=true. {"name":"SYNC_MODE_NOT_APPLICABLE","message":"Synchronous mode will soon be deprecated and is no longer available for new integrations. You can use the asynchronous mode by specifying sync_mode= false in the request.","debug_id":"6ac35f6b45e77","information_link":"https://developer.paypal.com/docs/api/payments.payouts-batch/#errors","links":[]}
+[19-11-2019 08:29:49] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 08:29:51] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[19-11-2019 08:29:52] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 08:29:52] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payouts?sync_mode=true
+[19-11-2019 08:29:52] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[19-11-2019 08:29:53] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[19-11-2019 08:29:53] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/payouts?sync_mode=true. {"name":"SYNC_MODE_NOT_APPLICABLE","message":"Synchronous mode will soon be deprecated and is no longer available for new integrations. You can use the asynchronous mode by specifying sync_mode= false in the request.","debug_id":"1f2672b55161c","information_link":"https://developer.paypal.com/docs/api/payments.payouts-batch/#errors","links":[]}
+[19-11-2019 08:31:31] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 08:31:34] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[19-11-2019 08:31:35] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 08:31:35] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payouts?sync_mode=false
+[19-11-2019 08:31:36] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[19-11-2019 08:31:37] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[19-11-2019 08:31:38] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/payouts?sync_mode=false. {"name":"AUTHORIZATION_ERROR","message":"Authorization error occurred.","debug_id":"d4ec7307b5608","information_link":"https://developer.paypal.com/docs/api/payments.payouts-batch/#errors","links":[]}
+[19-11-2019 08:34:28] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 08:34:30] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 08:34:30] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payouts?sync_mode=false
+[19-11-2019 08:34:31] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[19-11-2019 08:34:31] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/payouts?sync_mode=false. {"name":"AUTHORIZATION_ERROR","message":"Authorization error occurred.","debug_id":"b8f5b1030dbc4","information_link":"https://developer.paypal.com/docs/api/payments.payouts-batch/#errors","links":[]}
+[19-11-2019 08:36:45] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 08:36:47] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 08:36:47] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payouts?sync_mode=true
+[19-11-2019 08:36:48] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[19-11-2019 08:36:48] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/payouts?sync_mode=true. {"name":"SYNC_MODE_NOT_APPLICABLE","message":"Synchronous mode will soon be deprecated and is no longer available for new integrations. You can use the asynchronous mode by specifying sync_mode= false in the request.","debug_id":"39d654540b4ca","information_link":"https://developer.paypal.com/docs/api/payments.payouts-batch/#errors","links":[]}
+[19-11-2019 08:40:22] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 08:40:27] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 08:40:27] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payouts?sync_mode=false
+[19-11-2019 08:40:28] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[19-11-2019 08:40:28] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/payouts?sync_mode=false. {"name":"AUTHORIZATION_ERROR","message":"Authorization error occurred.","debug_id":"4763526387830","information_link":"https://developer.paypal.com/docs/api/payments.payouts-batch/#errors","links":[]}
+[19-11-2019 08:47:38] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[19-11-2019 08:47:42] PayPal\Core\PayPalHttpConnection : DEBUG: Request Headers 	: POST /v1/oauth2/token HTTP/1.1, Host: api.sandbox.paypal.com, User-Agent: PayPalSDK/PayPal-PHP-SDK 1.14.0 (platform-ver=7.1.9; bit=64; os=Windows_NT_6.1; machine=AMD64; crypto-lib-ver=1.0.2k; curl=7.55.0), Authorization: Basic QWZReGY2RnNsajctb2dTVTFta1VQd2U5XzFma0NrRkh5WVNKY3dtWWZmQ3ZPUjBQdFdrTG5EQmt5ckxHSmc4S1JRc0w4OEpUNWY4VWg0RFA6RUhxdDBHclJReG9CcktiU2VnLXo1VVhVZmZ0OGJVeE9ST0RqbW5IdG9kanVzdUFkU2ZCWGxtV2JoQkFTYmMyaFpsNWtmRjEtTmFhUzdNd3g=, Accept: */*, Content-Length: 29, Content-Type: application/x-www-form-urlencoded, , 
+[19-11-2019 08:47:42] PayPal\Core\PayPalHttpConnection : DEBUG: Request Data		: grant_type=client_credentials
+--------------------------------------------------------------------------------------------------------------------------------
+
+[19-11-2019 08:47:42] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 08:47:42] PayPal\Core\PayPalHttpConnection : DEBUG: Response Headers	: Cache-Control: max-age=0, no-cache, no-store, must-revalidate, Content-Length: 918, Content-Type: application/json, Date: Tue, 19 Nov 2019 08:48:12 GMT, Paypal-Debug-Id: b4b9daee03d2e, X-Paypal-Token-Service: IAAS, 
+[19-11-2019 08:47:42] PayPal\Core\PayPalHttpConnection : DEBUG: Response Data 	: {"scope":"https://uri.paypal.com/services/invoicing https://uri.paypal.com/services/disputes/read-buyer https://uri.paypal.com/services/payments/realtimepayment https://uri.paypal.com/services/disputes/update-seller https://uri.paypal.com/services/payments/payment/authcapture openid https://uri.paypal.com/services/disputes/read-seller https://uri.paypal.com/services/payments/refund https://api.paypal.com/v1/vault/credit-card https://api.paypal.com/v1/payments/.* https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.* https://uri.paypal.com/services/subscriptions https://uri.paypal.com/services/applications/webhooks","access_token":"A21AAGbgVUKjJKO7mPL7An1fKuCVcKtmrhuOHpdZxRRLozRxFkc_3hD9t7a1LDWCLozSjfxqRWAIBgRTzlEoUtFY8MnGTWlaA","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":32400,"nonce":"2019-11-19T08:48:12Zr65uaTAK_-iVVJp5uYTtdJZefttoESon4NImponNLC8"}
+
+================================================================================================================================
+
+[19-11-2019 08:47:42] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/payments/payment
+[19-11-2019 08:47:45] PayPal\Core\PayPalHttpConnection : DEBUG: Request Headers 	: POST /v1/payments/payment HTTP/1.1, Host: api.sandbox.paypal.com, Accept: */*, Content-Type: application/json, User-Agent: PayPalSDK/PayPal-PHP-SDK 1.14.0 (platform-ver=7.1.9; bit=64; os=Windows_NT_6.1; machine=AMD64; crypto-lib-ver=1.0.2k; curl=7.55.0), Authorization: Bearer A21AAGbgVUKjJKO7mPL7An1fKuCVcKtmrhuOHpdZxRRLozRxFkc_3hD9t7a1LDWCLozSjfxqRWAIBgRTzlEoUtFY8MnGTWlaA, Content-Length: 605, , 
+[19-11-2019 08:47:45] PayPal\Core\PayPalHttpConnection : DEBUG: Request Data		: {"intent":"sale","payer":{"payment_method":"paypal"},"redirect_urls":{"return_url":"https://valuelinkcorp.com/ExecutePayment.php?success=true","cancel_url":"https://valuelinkcorp.com/ExecutePayment.php?success=false"},"transactions":[{"amount":{"currency":"USD","total":"20","details":{"shipping":"1.20","tax":"1.30","subtotal":"17.50"}},"item_list":{"items":[{"name":"Ground Coffee 40 oz","currency":"USD","quantity":1,"sku":"123123","price":"7.50"},{"name":"Granola bars","currency":"USD","quantity":5,"sku":"321321","price":"2"}]},"description":"Payment description","invoice_number":"5dd3ac2a1f913"}]}
+--------------------------------------------------------------------------------------------------------------------------------
+
+[19-11-2019 08:47:45] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 201
+[19-11-2019 08:47:45] PayPal\Core\PayPalHttpConnection : DEBUG: Response Headers	: Cache-Control: max-age=0, no-cache, no-store, must-revalidate, Content-Language: *, Content-Length: 973, Content-Type: application/json, Date: Tue, 19 Nov 2019 08:48:16 GMT, Paypal-Debug-Id: dc202c4c698d, 
+[19-11-2019 08:47:45] PayPal\Core\PayPalHttpConnection : DEBUG: Response Data 	: {"id":"PAYID-LXJ2YTY01N14938HX228194G","intent":"sale","state":"created","payer":{"payment_method":"paypal"},"transactions":[{"amount":{"total":"20.00","currency":"USD","details":{"subtotal":"17.50","tax":"1.30","shipping":"1.20"}},"description":"Payment description","invoice_number":"5dd3ac2a1f913","item_list":{"items":[{"name":"Ground Coffee 40 oz","sku":"123123","price":"7.50","currency":"USD","quantity":1},{"name":"Granola bars","sku":"321321","price":"2.00","currency":"USD","quantity":5}]},"related_resources":[]}],"create_time":"2019-11-19T08:48:15Z","links":[{"href":"https://api.sandbox.paypal.com/v1/payments/payment/PAYID-LXJ2YTY01N14938HX228194G","rel":"self","method":"GET"},{"href":"https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-4WK22169E6907125V","rel":"approval_url","method":"REDIRECT"},{"href":"https://api.sandbox.paypal.com/v1/payments/payment/PAYID-LXJ2YTY01N14938HX228194G/execute","rel":"execute","method":"POST"}]}
+
+================================================================================================================================
+
+[19-11-2019 08:50:28] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[19-11-2019 08:50:30] PayPal\Core\PayPalHttpConnection : DEBUG: Request Headers 	: POST /v1/oauth2/token HTTP/1.1, Host: api.sandbox.paypal.com, User-Agent: PayPalSDK/PayPal-PHP-SDK 1.14.0 (platform-ver=7.1.9; bit=64; os=Windows_NT_6.1; machine=AMD64; crypto-lib-ver=1.0.2k; curl=7.55.0), Authorization: Basic QWZReGY2RnNsajctb2dTVTFta1VQd2U5XzFma0NrRkh5WVNKY3dtWWZmQ3ZPUjBQdFdrTG5EQmt5ckxHSmc4S1JRc0w4OEpUNWY4VWg0RFA6RUhxdDBHclJReG9CcktiU2VnLXo1VVhVZmZ0OGJVeE9ST0RqbW5IdG9kanVzdUFkU2ZCWGxtV2JoQkFTYmMyaFpsNWtmRjEtTmFhUzdNd3g=, Accept: */*, Content-Length: 29, Content-Type: application/x-www-form-urlencoded, , 
+[19-11-2019 08:50:30] PayPal\Core\PayPalHttpConnection : DEBUG: Request Data		: grant_type=client_credentials
+--------------------------------------------------------------------------------------------------------------------------------
+
+[19-11-2019 08:50:30] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 08:50:30] PayPal\Core\PayPalHttpConnection : DEBUG: Response Headers	: Cache-Control: max-age=0, no-cache, no-store, must-revalidate, Content-Length: 918, Content-Type: application/json, Date: Tue, 19 Nov 2019 08:51:01 GMT, Paypal-Debug-Id: e1edd4716e9f2, X-Paypal-Token-Service: IAAS, 
+[19-11-2019 08:50:30] PayPal\Core\PayPalHttpConnection : DEBUG: Response Data 	: {"scope":"https://uri.paypal.com/services/invoicing https://uri.paypal.com/services/disputes/read-buyer https://uri.paypal.com/services/payments/realtimepayment https://uri.paypal.com/services/disputes/update-seller https://uri.paypal.com/services/payments/payment/authcapture openid https://uri.paypal.com/services/disputes/read-seller https://uri.paypal.com/services/payments/refund https://api.paypal.com/v1/vault/credit-card https://api.paypal.com/v1/payments/.* https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.* https://uri.paypal.com/services/subscriptions https://uri.paypal.com/services/applications/webhooks","access_token":"A21AAGbgVUKjJKO7mPL7An1fKuCVcKtmrhuOHpdZxRRLozRxFkc_3hD9t7a1LDWCLozSjfxqRWAIBgRTzlEoUtFY8MnGTWlaA","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":32231,"nonce":"2019-11-19T08:48:12Zr65uaTAK_-iVVJp5uYTtdJZefttoESon4NImponNLC8"}
+
+================================================================================================================================
+
+[19-11-2019 08:50:30] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/payments/payment
+[19-11-2019 08:50:36] PayPal\Core\PayPalHttpConnection : DEBUG: Request Headers 	: POST /v1/payments/payment HTTP/1.1, Host: api.sandbox.paypal.com, Accept: */*, Content-Type: application/json, User-Agent: PayPalSDK/PayPal-PHP-SDK 1.14.0 (platform-ver=7.1.9; bit=64; os=Windows_NT_6.1; machine=AMD64; crypto-lib-ver=1.0.2k; curl=7.55.0), Authorization: Bearer A21AAGbgVUKjJKO7mPL7An1fKuCVcKtmrhuOHpdZxRRLozRxFkc_3hD9t7a1LDWCLozSjfxqRWAIBgRTzlEoUtFY8MnGTWlaA, Content-Length: 605, , 
+[19-11-2019 08:50:36] PayPal\Core\PayPalHttpConnection : DEBUG: Request Data		: {"intent":"sale","payer":{"payment_method":"paypal"},"redirect_urls":{"return_url":"https://valuelinkcorp.com/ExecutePayment.php?success=true","cancel_url":"https://valuelinkcorp.com/ExecutePayment.php?success=false"},"transactions":[{"amount":{"currency":"USD","total":"20","details":{"shipping":"1.20","tax":"1.30","subtotal":"17.50"}},"item_list":{"items":[{"name":"Ground Coffee 40 oz","currency":"USD","quantity":1,"sku":"123123","price":"7.50"},{"name":"Granola bars","currency":"USD","quantity":5,"sku":"321321","price":"2"}]},"description":"Payment description","invoice_number":"5dd3acd4e92bd"}]}
+--------------------------------------------------------------------------------------------------------------------------------
+
+[19-11-2019 08:50:36] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 201
+[19-11-2019 08:50:36] PayPal\Core\PayPalHttpConnection : DEBUG: Response Headers	: Cache-Control: max-age=0, no-cache, no-store, must-revalidate, Content-Language: *, Content-Length: 973, Content-Type: application/json, Date: Tue, 19 Nov 2019 08:51:06 GMT, Paypal-Debug-Id: 1c252503be1f8, 
+[19-11-2019 08:50:36] PayPal\Core\PayPalHttpConnection : DEBUG: Response Data 	: {"id":"PAYID-LXJ2Z6Q8RV63902CP203972P","intent":"sale","state":"created","payer":{"payment_method":"paypal"},"transactions":[{"amount":{"total":"20.00","currency":"USD","details":{"subtotal":"17.50","tax":"1.30","shipping":"1.20"}},"description":"Payment description","invoice_number":"5dd3acd4e92bd","item_list":{"items":[{"name":"Ground Coffee 40 oz","sku":"123123","price":"7.50","currency":"USD","quantity":1},{"name":"Granola bars","sku":"321321","price":"2.00","currency":"USD","quantity":5}]},"related_resources":[]}],"create_time":"2019-11-19T08:51:06Z","links":[{"href":"https://api.sandbox.paypal.com/v1/payments/payment/PAYID-LXJ2Z6Q8RV63902CP203972P","rel":"self","method":"GET"},{"href":"https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-11J19883BJ4680349","rel":"approval_url","method":"REDIRECT"},{"href":"https://api.sandbox.paypal.com/v1/payments/payment/PAYID-LXJ2Z6Q8RV63902CP203972P/execute","rel":"execute","method":"POST"}]}
+
+================================================================================================================================
+
+[19-11-2019 08:51:08] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[19-11-2019 08:51:10] PayPal\Core\PayPalHttpConnection : DEBUG: Request Headers 	: POST /v1/oauth2/token HTTP/1.1, Host: api.sandbox.paypal.com, User-Agent: PayPalSDK/PayPal-PHP-SDK 1.14.0 (platform-ver=7.1.9; bit=64; os=Windows_NT_6.1; machine=AMD64; crypto-lib-ver=1.0.2k; curl=7.55.0), Authorization: Basic QWZReGY2RnNsajctb2dTVTFta1VQd2U5XzFma0NrRkh5WVNKY3dtWWZmQ3ZPUjBQdFdrTG5EQmt5ckxHSmc4S1JRc0w4OEpUNWY4VWg0RFA6RUhxdDBHclJReG9CcktiU2VnLXo1VVhVZmZ0OGJVeE9ST0RqbW5IdG9kanVzdUFkU2ZCWGxtV2JoQkFTYmMyaFpsNWtmRjEtTmFhUzdNd3g=, Accept: */*, Content-Length: 29, Content-Type: application/x-www-form-urlencoded, , 
+[19-11-2019 08:51:10] PayPal\Core\PayPalHttpConnection : DEBUG: Request Data		: grant_type=client_credentials
+--------------------------------------------------------------------------------------------------------------------------------
+
+[19-11-2019 08:51:10] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 08:51:10] PayPal\Core\PayPalHttpConnection : DEBUG: Response Headers	: Cache-Control: max-age=0, no-cache, no-store, must-revalidate, Content-Length: 918, Content-Type: application/json, Date: Tue, 19 Nov 2019 08:51:40 GMT, Paypal-Debug-Id: 530bf8394f2c6, X-Paypal-Token-Service: IAAS, 
+[19-11-2019 08:51:10] PayPal\Core\PayPalHttpConnection : DEBUG: Response Data 	: {"scope":"https://uri.paypal.com/services/invoicing https://uri.paypal.com/services/disputes/read-buyer https://uri.paypal.com/services/payments/realtimepayment https://uri.paypal.com/services/disputes/update-seller https://uri.paypal.com/services/payments/payment/authcapture openid https://uri.paypal.com/services/disputes/read-seller https://uri.paypal.com/services/payments/refund https://api.paypal.com/v1/vault/credit-card https://api.paypal.com/v1/payments/.* https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.* https://uri.paypal.com/services/subscriptions https://uri.paypal.com/services/applications/webhooks","access_token":"A21AAGbgVUKjJKO7mPL7An1fKuCVcKtmrhuOHpdZxRRLozRxFkc_3hD9t7a1LDWCLozSjfxqRWAIBgRTzlEoUtFY8MnGTWlaA","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":32191,"nonce":"2019-11-19T08:48:12Zr65uaTAK_-iVVJp5uYTtdJZefttoESon4NImponNLC8"}
+
+================================================================================================================================
+
+[19-11-2019 08:51:10] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/payments/payment
+[19-11-2019 08:51:21] PayPal\Core\PayPalHttpConnection : DEBUG: Request Headers 	: POST /v1/payments/payment HTTP/1.1, Host: api.sandbox.paypal.com, Accept: */*, Content-Type: application/json, User-Agent: PayPalSDK/PayPal-PHP-SDK 1.14.0 (platform-ver=7.1.9; bit=64; os=Windows_NT_6.1; machine=AMD64; crypto-lib-ver=1.0.2k; curl=7.55.0), Authorization: Bearer A21AAGbgVUKjJKO7mPL7An1fKuCVcKtmrhuOHpdZxRRLozRxFkc_3hD9t7a1LDWCLozSjfxqRWAIBgRTzlEoUtFY8MnGTWlaA, Content-Length: 605, , 
+[19-11-2019 08:51:21] PayPal\Core\PayPalHttpConnection : DEBUG: Request Data		: {"intent":"sale","payer":{"payment_method":"paypal"},"redirect_urls":{"return_url":"https://valuelinkcorp.com/ExecutePayment.php?success=true","cancel_url":"https://valuelinkcorp.com/ExecutePayment.php?success=false"},"transactions":[{"amount":{"currency":"USD","total":"20","details":{"shipping":"1.20","tax":"1.30","subtotal":"17.50"}},"item_list":{"items":[{"name":"Ground Coffee 40 oz","currency":"USD","quantity":1,"sku":"123123","price":"7.50"},{"name":"Granola bars","currency":"USD","quantity":5,"sku":"321321","price":"2"}]},"description":"Payment description","invoice_number":"5dd3acfca1f2c"}]}
+--------------------------------------------------------------------------------------------------------------------------------
+
+[19-11-2019 08:51:21] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 201
+[19-11-2019 08:51:21] PayPal\Core\PayPalHttpConnection : DEBUG: Response Headers	: Cache-Control: max-age=0, no-cache, no-store, must-revalidate, Content-Language: *, Content-Length: 973, Content-Type: application/json, Date: Tue, 19 Nov 2019 08:51:51 GMT, Paypal-Debug-Id: 2a49d7cb338d1, 
+[19-11-2019 08:51:21] PayPal\Core\PayPalHttpConnection : DEBUG: Response Data 	: {"id":"PAYID-LXJ22JY5U209833V2603713J","intent":"sale","state":"created","payer":{"payment_method":"paypal"},"transactions":[{"amount":{"total":"20.00","currency":"USD","details":{"subtotal":"17.50","tax":"1.30","shipping":"1.20"}},"description":"Payment description","invoice_number":"5dd3acfca1f2c","item_list":{"items":[{"name":"Ground Coffee 40 oz","sku":"123123","price":"7.50","currency":"USD","quantity":1},{"name":"Granola bars","sku":"321321","price":"2.00","currency":"USD","quantity":5}]},"related_resources":[]}],"create_time":"2019-11-19T08:51:51Z","links":[{"href":"https://api.sandbox.paypal.com/v1/payments/payment/PAYID-LXJ22JY5U209833V2603713J","rel":"self","method":"GET"},{"href":"https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-2J539717FN792445N","rel":"approval_url","method":"REDIRECT"},{"href":"https://api.sandbox.paypal.com/v1/payments/payment/PAYID-LXJ22JY5U209833V2603713J/execute","rel":"execute","method":"POST"}]}
+
+================================================================================================================================
+
+[19-11-2019 08:54:09] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[19-11-2019 08:54:13] PayPal\Core\PayPalHttpConnection : DEBUG: Request Headers 	: POST /v1/oauth2/token HTTP/1.1, Host: api.sandbox.paypal.com, User-Agent: PayPalSDK/PayPal-PHP-SDK 1.14.0 (platform-ver=7.1.9; bit=64; os=Windows_NT_6.1; machine=AMD64; crypto-lib-ver=1.0.2k; curl=7.55.0), Authorization: Basic QWZReGY2RnNsajctb2dTVTFta1VQd2U5XzFma0NrRkh5WVNKY3dtWWZmQ3ZPUjBQdFdrTG5EQmt5ckxHSmc4S1JRc0w4OEpUNWY4VWg0RFA6RUhxdDBHclJReG9CcktiU2VnLXo1VVhVZmZ0OGJVeE9ST0RqbW5IdG9kanVzdUFkU2ZCWGxtV2JoQkFTYmMyaFpsNWtmRjEtTmFhUzdNd3g=, Accept: */*, Content-Length: 29, Content-Type: application/x-www-form-urlencoded, , 
+[19-11-2019 08:54:13] PayPal\Core\PayPalHttpConnection : DEBUG: Request Data		: grant_type=client_credentials
+--------------------------------------------------------------------------------------------------------------------------------
+
+[19-11-2019 08:54:13] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 08:54:13] PayPal\Core\PayPalHttpConnection : DEBUG: Response Headers	: Cache-Control: max-age=0, no-cache, no-store, must-revalidate, Content-Length: 918, Content-Type: application/json, Date: Tue, 19 Nov 2019 08:54:43 GMT, Paypal-Debug-Id: 2ca50f9b359ae, X-Paypal-Token-Service: IAAS, 
+[19-11-2019 08:54:13] PayPal\Core\PayPalHttpConnection : DEBUG: Response Data 	: {"scope":"https://uri.paypal.com/services/invoicing https://uri.paypal.com/services/disputes/read-buyer https://uri.paypal.com/services/payments/realtimepayment https://uri.paypal.com/services/disputes/update-seller https://uri.paypal.com/services/payments/payment/authcapture openid https://uri.paypal.com/services/disputes/read-seller https://uri.paypal.com/services/payments/refund https://api.paypal.com/v1/vault/credit-card https://api.paypal.com/v1/payments/.* https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.* https://uri.paypal.com/services/subscriptions https://uri.paypal.com/services/applications/webhooks","access_token":"A21AAGbgVUKjJKO7mPL7An1fKuCVcKtmrhuOHpdZxRRLozRxFkc_3hD9t7a1LDWCLozSjfxqRWAIBgRTzlEoUtFY8MnGTWlaA","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":32009,"nonce":"2019-11-19T08:48:12Zr65uaTAK_-iVVJp5uYTtdJZefttoESon4NImponNLC8"}
+
+================================================================================================================================
+
+[19-11-2019 08:54:13] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/payments/payouts?sync_mode=false
+[19-11-2019 08:54:15] PayPal\Core\PayPalHttpConnection : DEBUG: Request Headers 	: POST /v1/payments/payouts?sync_mode=false HTTP/1.1, Host: api.sandbox.paypal.com, Accept: */*, Content-Type: application/json, User-Agent: PayPalSDK/PayPal-PHP-SDK 1.14.0 (platform-ver=7.1.9; bit=64; os=Windows_NT_6.1; machine=AMD64; crypto-lib-ver=1.0.2k; curl=7.55.0), Authorization: Bearer A21AAGbgVUKjJKO7mPL7An1fKuCVcKtmrhuOHpdZxRRLozRxFkc_3hD9t7a1LDWCLozSjfxqRWAIBgRTzlEoUtFY8MnGTWlaA, Content-Length: 277, , 
+[19-11-2019 08:54:15] PayPal\Core\PayPalHttpConnection : DEBUG: Request Data		: {"sender_batch_header":{"sender_batch_id":"5dd3adb10ecf3","email_subject":"You have a Payout!"},"items":[{"recipient_type":"Email","note":"Thanks for your patronage!","receiver":"7842437@gmail.com","sender_item_id":"20140314000231","amount":{"value":"1.00","currency":"USD"}}]}
+--------------------------------------------------------------------------------------------------------------------------------
+
+[19-11-2019 08:54:15] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 422
+[19-11-2019 08:54:15] PayPal\Core\PayPalHttpConnection : DEBUG: Response Headers	: Cache-Control: max-age=0, no-cache, no-store, must-revalidate, Content-Length: 236, Content-Type: application/json, Date: Tue, 19 Nov 2019 08:54:46 GMT, Paypal-Debug-Id: ec9d73d72dc42, 
+[19-11-2019 08:54:15] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 422 when accessing https://api.sandbox.paypal.com/v1/payments/payouts?sync_mode=false. {"name":"INSUFFICIENT_FUNDS","message":"Sender does not have sufficient funds. Please add funds and retry.","debug_id":"ec9d73d72dc42","information_link":"https://developer.paypal.com/docs/api/payments.payouts-batch/#errors","links":[]}
+[19-11-2019 08:54:15] PayPal\Core\PayPalHttpConnection : DEBUG: 
+
+================================================================================================================================
+
+[19-11-2019 08:55:14] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 08:55:18] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 08:55:18] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payouts?sync_mode=false
+[19-11-2019 08:55:19] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[19-11-2019 08:55:19] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/payouts?sync_mode=false. {"name":"AUTHORIZATION_ERROR","message":"Authorization error occurred.","debug_id":"517b1d363ca83","information_link":"https://developer.paypal.com/docs/api/payments.payouts-batch/#errors","links":[]}
+[19-11-2019 09:12:11] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 09:12:13] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 09:12:13] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payment
+[19-11-2019 09:12:14] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 201
+[19-11-2019 09:15:54] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 09:15:56] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 09:15:56] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payment
+[19-11-2019 09:15:57] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 201
+[19-11-2019 09:15:57] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payouts?sync_mode=false
+[19-11-2019 09:15:57] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[19-11-2019 09:15:57] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/payouts?sync_mode=false. {"name":"AUTHORIZATION_ERROR","message":"Authorization error occurred.","debug_id":"b4012ee3ddf5c","information_link":"https://developer.paypal.com/docs/api/payments.payouts-batch/#errors","links":[]}
+[19-11-2019 09:37:30] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 09:37:46] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 09:38:36] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 09:38:38] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 09:38:38] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payment
+[19-11-2019 09:38:39] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 201
+[19-11-2019 09:38:39] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payouts?sync_mode=0
+[19-11-2019 09:38:40] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[19-11-2019 09:38:40] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/payouts?sync_mode=0. {"name":"AUTHORIZATION_ERROR","message":"Authorization error occurred.","debug_id":"380c24d9a2bd1","information_link":"https://developer.paypal.com/docs/api/payments.payouts-batch/#errors","links":[]}
+[19-11-2019 09:39:22] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 09:39:24] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 09:39:24] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payment
+[19-11-2019 09:39:53] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 09:40:16] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 09:40:18] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 09:40:18] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payment
+[19-11-2019 09:40:19] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 201
+[19-11-2019 09:40:19] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payouts?sync_mode=1
+[19-11-2019 09:40:21] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[19-11-2019 09:40:21] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/payouts?sync_mode=1. {"name":"AUTHORIZATION_ERROR","message":"Authorization error occurred.","debug_id":"77a0d054b1065","information_link":"https://developer.paypal.com/docs/api/payments.payouts-batch/#errors","links":[]}
+[19-11-2019 09:41:38] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[19-11-2019 09:41:41] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[19-11-2019 09:41:41] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payment
+[19-11-2019 09:41:49] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 201
+[19-11-2019 09:41:49] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payouts?sync_mode=1
+[19-11-2019 09:41:50] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[19-11-2019 09:41:50] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/payouts?sync_mode=1. {"name":"AUTHORIZATION_ERROR","message":"Authorization error occurred.","debug_id":"ce38b8a115b5","information_link":"https://developer.paypal.com/docs/api/payments.payouts-batch/#errors","links":[]}
+[26-11-2019 04:17:20] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[26-11-2019 04:17:38] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[26-11-2019 04:17:40] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[26-11-2019 04:17:40] PayPal\Core\PayPalHttpConnection : INFO: GET https://api.paypal.com/v1/payments/payment?count=10&start_index=5
+[26-11-2019 04:17:43] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[26-11-2019 04:18:21] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[26-11-2019 04:18:25] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[26-11-2019 04:18:25] PayPal\Core\PayPalHttpConnection : INFO: GET https://api.paypal.com/v1/payments/payment?count=10&start_index=5
+[26-11-2019 04:18:46] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[26-11-2019 04:20:09] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[26-11-2019 04:20:11] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[26-11-2019 04:20:11] PayPal\Core\PayPalHttpConnection : INFO: GET https://api.paypal.com/v1/payments/payment?count=10&start_time=2016-03-06T11%A3%BA00%A3%BA00Z
+[26-11-2019 04:20:12] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 400
+[26-11-2019 04:20:12] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 400 when accessing https://api.paypal.com/v1/payments/payment?count=10&start_time=2016-03-06T11%A3%BA00%A3%BA00Z. {"name":"VALIDATION_ERROR","details":[{"field":"start_time","issue":"Must be a date_time string of form yyyy-mm-ddThh:mm:ssZ"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/payments/#errors","debug_id":"872d3204fc009"}
+[26-11-2019 04:20:32] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[26-11-2019 04:20:36] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[26-11-2019 04:20:36] PayPal\Core\PayPalHttpConnection : INFO: GET https://api.paypal.com/v1/payments/payment?count=10&start_time=2016-03-06T11%A3%BA00%A3%BA00Z
+[26-11-2019 04:20:37] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 400
+[26-11-2019 04:20:37] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 400 when accessing https://api.paypal.com/v1/payments/payment?count=10&start_time=2016-03-06T11%A3%BA00%A3%BA00Z. {"name":"VALIDATION_ERROR","details":[{"field":"start_time","issue":"Must be a date_time string of form yyyy-mm-ddThh:mm:ssZ"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/payments/#errors","debug_id":"45bd4d3c86d1f"}
+[26-11-2019 04:21:22] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[26-11-2019 04:21:25] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[26-11-2019 04:21:25] PayPal\Core\PayPalHttpConnection : INFO: GET https://api.paypal.com/v1/payments/payment?count=10&start_time=2016-03-06T11%3A00%3A00Z
+[26-11-2019 04:21:28] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[26-11-2019 04:23:19] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[26-11-2019 04:23:21] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[26-11-2019 04:23:21] PayPal\Core\PayPalHttpConnection : INFO: GET https://api.paypal.com/v1/payments/payment?count=10&start_time=2019-03-06T11%3A00%3A00Z&end_time=2019-11-06T11%3A00%3A00Z
+[26-11-2019 04:23:23] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[26-11-2019 05:42:09] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[26-11-2019 05:42:12] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[26-11-2019 05:42:12] PayPal\Core\PayPalHttpConnection : INFO: GET https://api.paypal.com/v1/payments/payment?count=10&start_time=2019-03-06T11%3A00%3A00Z&end_time=2019-11-06T11%3A00%3A00Z&start_index=0
+[26-11-2019 05:42:16] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[26-11-2019 05:47:20] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[26-11-2019 05:47:34] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[26-11-2019 05:48:01] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[26-11-2019 05:48:01] PayPal\Core\PayPalHttpConnection : INFO: GET https://api.paypal.com/v1/payments/payment?count=10&start_time=2019-11-24T00%3A00%3A00Z&end_time=2019-11-26T11%3A00%3A00Z&start_index=0
+[26-11-2019 05:48:16] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[26-11-2019 05:48:42] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[26-11-2019 05:48:49] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[26-11-2019 05:48:49] PayPal\Core\PayPalHttpConnection : INFO: GET https://api.paypal.com/v1/payments/payment?count=10&start_time=2019-11-24T00%3A00%3A00Z&end_time=2019-11-26T11%3A00%3A00Z&start_index=0
+[26-11-2019 05:48:54] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
