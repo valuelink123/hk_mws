@@ -31,6 +31,7 @@ class GetFinancesForAccount implements ShouldQueue
 	protected $account;
     protected $afterDate;
     protected $beforeDate;
+    protected $current_marketplaces;
     /**
      * Create a new job instance.
      *
@@ -67,6 +68,10 @@ class GetFinancesForAccount implements ShouldQueue
             );
             $after_date=$this->afterDate;
             $before_date=$this->beforeDate;
+            $this->current_marketplaces = SellerAccounts::where('seller_accounts.mws_seller_id',$account->mws_seller_id)->whereNull('seller_accounts.deleted_at')
+            ->leftJoin('additional_marketplaces',function($key){
+                $key->on('seller_accounts.mws_marketplaceid', '=', 'additional_marketplaces.marketplace_id');
+            })->get(['seller_accounts.id','additional_marketplace_id','additional_marketplace_name'])->keyBy('additional_marketplace_name')->toArray();
             while($after_date<$before_date){
                 $defaultDate = $after_date.' 00:00:00';
                 $nextToken = null;
@@ -99,25 +104,25 @@ class GetFinancesForAccount implements ShouldQueue
                         $resultResponse = $objResponse->{$resultName};
                         $nextToken = isset($resultResponse->NextToken) ? $resultResponse->NextToken : null;
                         $notEnd = !empty($nextToken);
-                        //ShipmentEventList ¿ªÊ¼
+                        //ShipmentEventList ï¿½ï¿½Ê¼
                         $shipmentEvents = isset($resultResponse->FinancialEvents->ShipmentEventList->ShipmentEvent) ? $resultResponse->FinancialEvents->ShipmentEventList->ShipmentEvent : [];
 
                         $this->getShipmentEvent($shipmentEvents,new FinancesShipmentEvent,$defaultDate);
 
-                        //RefundEventList ¿ªÊ¼
+                        //RefundEventList ï¿½ï¿½Ê¼
                         $shipmentEvents = isset($resultResponse->FinancialEvents->RefundEventList->ShipmentEvent) ? $resultResponse->FinancialEvents->RefundEventList->ShipmentEvent : [];
                         $this->getShipmentEvent($shipmentEvents,new FinancesRefundEvent,$defaultDate);
 
-                        //GuaranteeClaimEventList ¿ªÊ¼
+                        //GuaranteeClaimEventList ï¿½ï¿½Ê¼
                         $shipmentEvents = isset($resultResponse->FinancialEvents->GuaranteeClaimEventList->ShipmentEvent) ? $resultResponse->FinancialEvents->GuaranteeClaimEventList->ShipmentEvent : [];
                         $this->getShipmentEvent($shipmentEvents,new FinancesRefundEvent,$defaultDate);
 
-                        //ChargebackEventList ¿ªÊ¼
+                        //ChargebackEventList ï¿½ï¿½Ê¼
                         $shipmentEvents = isset($resultResponse->FinancialEvents->ChargebackEventList->ShipmentEvent) ? $resultResponse->FinancialEvents->ChargebackEventList->ShipmentEvent : [];
                         $this->getShipmentEvent($shipmentEvents,new FinancesRefundEvent,$defaultDate);
 
 
-                        //ProductAdsPaymentEventList ¿ªÊ¼
+                        //ProductAdsPaymentEventList ï¿½ï¿½Ê¼
                         $adsEvents = isset($resultResponse->FinancialEvents->ProductAdsPaymentEventList->ProductAdsPaymentEvent) ? $resultResponse->FinancialEvents->ProductAdsPaymentEventList->ProductAdsPaymentEvent : [];
                         foreach($adsEvents as $adsEvent){
                             $insert_data=[];
@@ -138,7 +143,7 @@ class GetFinancesForAccount implements ShouldQueue
                         }
 
 
-                        //ServiceFeeEventList ¿ªÊ¼
+                        //ServiceFeeEventList ï¿½ï¿½Ê¼
 
                         $serviceFeeEvents = isset($resultResponse->FinancialEvents->ServiceFeeEventList->ServiceFeeEvent) ? $resultResponse->FinancialEvents->ServiceFeeEventList->ServiceFeeEvent : [];
 
@@ -176,7 +181,8 @@ class GetFinancesForAccount implements ShouldQueue
 
 
 
-                        //RetrochargeEventList ¿ªÊ¼
+                        //RetrochargeEventList ï¿½ï¿½Ê¼
+
                         
                         $retrochargeEvents = isset($resultResponse->FinancialEvents->RetrochargeEventList->RetrochargeEvent) ? $resultResponse->FinancialEvents->RetrochargeEventList->RetrochargeEvent : [];
                         foreach($retrochargeEvents as $retrochargeEvent){
@@ -191,14 +197,17 @@ class GetFinancesForAccount implements ShouldQueue
                             $insert_data['shipping_tax']=array_get($arrayFee,'ShippingTax.CurrencyAmount',0);
                             $insert_data['marketplace_name']=array_get($arrayFee,'MarketplaceName','');
                             $insert_data['currency']=array_get($arrayFee,'BaseTax.CurrencyCode','');
-
+                            if(isset($this->current_marketplaces[$insert_data['marketplace_name']])){
+                                $insert_data['current_marketplace_id']=$this->current_marketplaces[$insert_data['marketplace_name']]['additional_marketplace_id'];
+                                $insert_data['current_seller_account_id']=$this->current_marketplaces[$insert_data['marketplace_name']]['id'];
+                            }
                             //MultipleQueue::pushOn(MultipleQueue::DB_WRITE,function ($job) use ($insert_data) {
                             	FinancesRetrochargeEvent::insertIgnore($insert_data);
                             //});
                         }
 
 
-                        //SAFETReimbursementEvent ¿ªÊ¼
+                        //SAFETReimbursementEvent ï¿½ï¿½Ê¼
                         $SAFETReimbursementEvents = isset($resultResponse->FinancialEvents->SAFETReimbursementEventList->SAFETReimbursementEvent) ? $resultResponse->FinancialEvents->SAFETReimbursementEventList->SAFETReimbursementEvent : [];
                         foreach($SAFETReimbursementEvents as $SAFETReimbursementEvent){
                             $insert_data=[];
@@ -214,7 +223,7 @@ class GetFinancesForAccount implements ShouldQueue
                             //});
                         }
 
-                        //FBALiquidationEvent ¿ªÊ¼
+                        //FBALiquidationEvent ï¿½ï¿½Ê¼
                         $FBALiquidationEvents = isset($resultResponse->FinancialEvents->FBALiquidationEventList->FBALiquidationEvent) ? $resultResponse->FinancialEvents->FBALiquidationEventList->FBALiquidationEvent : [];
                         foreach($FBALiquidationEvents as $FBALiquidationEvent){
                             $insert_data=[];
@@ -234,7 +243,7 @@ class GetFinancesForAccount implements ShouldQueue
 
 
 
-                        //AdjustmentEventList ¿ªÊ¼
+                        //AdjustmentEventList ï¿½ï¿½Ê¼
                         $adjustmentEvents = isset($resultResponse->FinancialEvents->AdjustmentEventList->AdjustmentEvent) ? $resultResponse->FinancialEvents->AdjustmentEventList->AdjustmentEvent : [];
                         foreach($adjustmentEvents as $adjustmentEvent){
 
@@ -272,13 +281,13 @@ class GetFinancesForAccount implements ShouldQueue
                                 //MultipleQueue::pushOn(MultipleQueue::DB_WRITE,function () use ($insert_data, $data) {
                                 //	FinancesAdjustmentEvent::insertIgnore($insert_data);
                                 //});
-                                //½è¼Ç ÐÅÓÃ?
+                                //ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½?
                             }
                         }
 
 
 
-                        //CouponPaymentEventList ¿ªÊ¼
+                        //CouponPaymentEventList ï¿½ï¿½Ê¼
                         $couponEvents = isset($resultResponse->FinancialEvents->CouponPaymentEventList->CouponPaymentEvent) ? $resultResponse->FinancialEvents->CouponPaymentEventList->CouponPaymentEvent : [];
                         foreach($couponEvents as $couponEvent){
                             $insert_data=[];
@@ -301,7 +310,7 @@ class GetFinancesForAccount implements ShouldQueue
 
 
 
-                        //SellerDealPaymentEventList ¿ªÊ¼
+                        //SellerDealPaymentEventList ï¿½ï¿½Ê¼
                         $dealEvents = isset($resultResponse->FinancialEvents->SellerDealPaymentEventList->SellerDealPaymentEvent) ? $resultResponse->FinancialEvents->SellerDealPaymentEventList->SellerDealPaymentEvent : [];
                         foreach($dealEvents as $dealEvent){
                             $insert_data=[];
@@ -356,6 +365,10 @@ class GetFinancesForAccount implements ShouldQueue
             $insert_data['seller_order_id']=isset($shipmentEvent->SellerOrderId)?(string)$shipmentEvent->SellerOrderId:'';
             $insert_data['marketplace_name']=isset($shipmentEvent->MarketplaceName)?(string)$shipmentEvent->MarketplaceName:'';
             $insert_data['posted_date']=isset($shipmentEvent->PostedDate)?date('Y-m-d H:i:s',strtotime($shipmentEvent->PostedDate)):$defaultDate;
+            if(isset($this->current_marketplaces[$insert_data['marketplace_name']])){
+                $insert_data['current_marketplace_id']=$this->current_marketplaces[$insert_data['marketplace_name']]['additional_marketplace_id'];
+                $insert_data['current_seller_account_id']=$this->current_marketplaces[$insert_data['marketplace_name']]['id'];
+            }
             if(isset($shipmentEvent->ShipmentItemList->ShipmentItem)){
                 $shipmentItems = $shipmentEvent->ShipmentItemList->ShipmentItem;
                 $orderLineNum=0;

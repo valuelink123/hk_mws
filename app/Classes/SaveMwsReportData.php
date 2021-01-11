@@ -197,7 +197,11 @@ class SaveMwsReportData {
 		}
 		if($itemData){
 			AmazonSettlement::insert($data);
-			AmazonSettlementDetail::insert($itemData);
+			$chunk_result = array_chunk($itemData, 200);
+			foreach($chunk_result as $k=>$v){
+				AmazonSettlementDetail::insert($v);
+			}
+			//AmazonSettlementDetail::insert($itemData);
 		}
 	}
 	public function saveDailyInventory(){
