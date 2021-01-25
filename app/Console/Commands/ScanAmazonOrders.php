@@ -39,8 +39,8 @@ class ScanAmazonOrders extends Command
     public function handle()
     {
         $this->info('Scan orders started');
-        $sellerAccounts = SellerAccounts::whereNull('deleted_at');
-        if($this->option('sellerId')) $sellerAccounts=$sellerAccounts->whereNull('created_at')->where('mws_seller_id',$this->option('sellerId'));
+        $sellerAccounts = SellerAccounts::whereNull('deleted_at')->whereNull('created_at');
+        if($this->option('sellerId')) $sellerAccounts=$sellerAccounts->where('mws_seller_id',$this->option('sellerId'));
 		$sellerAccounts->chunk(10,function($sellers){
             foreach ($sellers as $seller) {
                 $seller->created_at=date("Y-m-d H:i:s");
