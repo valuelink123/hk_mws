@@ -289,7 +289,8 @@ class GetOrdersForAccount implements ShouldQueue
 						Order::insertOnDuplicateWithDeadlockCatching($insertData,['updated_at','seller_order_id','order_status','buyer_email','buyer_name','purchase_date','purchase_local_date','fulfillment_channel','last_update_date','sales_channel','order_channel','ship_service_level','name','address_line1','address_line2','address_line3','city','county','district','state_or_region','postal_code','country_code','phone','amount','currency_code','number_of_items_shipped','number_of_items_unshipped','payment_method','ship_service_level_category','earliest_ship_date','latest_ship_date','earliest_delivery_date','latest_delivery_date','order_type','asins','seller_skus']);
 						OrderItem::insertOnDuplicateWithDeadlockCatching($insertItemData,['asin','seller_sku','purchase_date','fulfillment_channel','title','quantity_ordered','quantity_shipped','gift_wrap_level','gift_message_text','item_price_amount','item_price_currency_code','shipping_price_amount','shipping_price_currency_code','gift_wrap_price_amount','gift_wrap_price_currency_code','item_tax_amount','item_tax_currency_code','shipping_tax_amount','shipping_tax_currency_code','gift_wrap_tax_amount','gift_wrap_tax_currency_code','shipping_discount_amount','shipping_discount_currency_code','promotion_discount_amount','promotion_discount_currency_code','promotion_ids','cod_fee_amount','cod_fee_currency_code','cod_fee_discount_amount','cod_fee_discount_currency_code']);
 						if($sapInsertItemData) SapOrderItem::insertIgnore($sapInsertItemData);
-						if($sapInsertData) SapOrder::insertIgnore($sapInsertData);									
+						if($sapInsertData) SapOrder::insertIgnore($sapInsertData);
+						$account->last_update_order_date  = $lastOrderUpdateDate;									
                         $insertData = $insertItemData = $sapInsertItemData = $sapInsertData = array();
                     }
                 } catch (MarketplaceWebServiceOrders_Exception $ex) {
@@ -302,7 +303,7 @@ class GetOrdersForAccount implements ShouldQueue
 					}
                 }
 			} while ($notEnd);
-			$account->created_at = Null;
+			$account->created_at = NULL;
 			$account->last_action_result  = $errorMessage??('Success '.Carbon::now()->toDateTimeString());
 			$account->save();
         }
