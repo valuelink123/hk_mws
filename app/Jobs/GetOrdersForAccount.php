@@ -63,7 +63,7 @@ class GetOrdersForAccount implements ShouldQueue
 
             );
             $notEnd = false;
-            $nextToken = $errorMessage = null;
+			$nextToken = $errorMessage = null;
 			$insertItemData=$insertData=$sapInsertItemData=$sapInsertData=array();
 			$lastOrderUpdateDate = Carbon::parse($account->last_update_order_date??$this->afterDate)->toDateTimeString();
 			$siteLocalTimeDiff['Amazon.com']= -7*3600;
@@ -294,13 +294,8 @@ class GetOrdersForAccount implements ShouldQueue
                         $insertData = $insertItemData = $sapInsertItemData = $sapInsertData = array();
                     }
                 } catch (MarketplaceWebServiceOrders_Exception $ex) {
-                    if (getExRetry($ex)) {
-						$notEnd = true;
-						sleep(60);
-					}else{
-						$errorMessage = $ex->getMessage();
-						$notEnd = false;
-					}
+					$errorMessage = $ex->getMessage();
+					$notEnd = false;
                 }
 			} while ($notEnd);
 			$account->created_at = NULL;
@@ -339,14 +334,8 @@ class GetOrdersForAccount implements ShouldQueue
                 {
                     $orderItems[] = json_decode(json_encode($item), true);
                 }
-
             } catch (MarketplaceWebServiceOrders_Exception $ex) {
-                if (getExRetry($ex)) {
-					$notEnd = true;
-					sleep(60);
-				}else{
-					throw $ex;
-				}
+				throw $ex;
 			}
 			sleep(2);
         }
