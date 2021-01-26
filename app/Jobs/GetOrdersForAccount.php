@@ -65,7 +65,7 @@ class GetOrdersForAccount implements ShouldQueue
             );
             $notEnd = false;
 			$nextToken = $errorMessage = null;
-			$insertItemData=$insertData=array();
+			
 			$lastOrderUpdateDate = Carbon::parse($account->last_update_order_date??$this->afterDate)->toDateTimeString();
 			$siteLocalTimeDiff['Amazon.com']= -7*3600;
 			$siteLocalTimeDiff['Amazon.co.jp']= 9*3600;
@@ -102,57 +102,13 @@ class GetOrdersForAccount implements ShouldQueue
                     $nextToken = isset($resultResponse->NextToken)?$resultResponse->NextToken:null;
                     $lastOrders = isset($resultResponse->Orders->Order)?$resultResponse->Orders->Order:[];
                     $notEnd = !empty($nextToken);
+                    $insertData=array();
                     foreach($lastOrders as $order)
                     {
-						
-                        $asins=$seller_skus="";
                         $arrayOrder = json_decode(json_encode($order), true);
                         $purchaseDate=Carbon::parse(array_get($arrayOrder,'PurchaseDate',''))->toDateTimeString();
                         $lastUpdateDate=Carbon::parse(array_get($arrayOrder,'LastUpdateDate',''))->toDateTimeString();
                         if($lastOrderUpdateDate < $lastUpdateDate) $lastOrderUpdateDate = $lastUpdateDate;
-                        $arrayOrderItems = self::getOrderItems(array_get($arrayOrder,'AmazonOrderId',''));
-
-                        foreach($arrayOrderItems as $ordersItem){
-							unset($insertItemArray);
-                            $asins.=array_get($ordersItem,'ASIN').'*'.array_get($ordersItem,'QuantityOrdered').';';
-                            $seller_skus.=array_get($ordersItem,'SellerSKU').'*'.array_get($ordersItem,'QuantityOrdered').';';	
-							$insertItemArray['user_id'] = $account->user_id;
-                            $insertItemArray['seller_account_id'] = (string) $account->id;
-							$insertItemArray['purchase_date'] = $purchaseDate;
-							$insertItemArray['fulfillment_channel'] = array_get($arrayOrder,'FulfillmentChannel','');
-                            $insertItemArray['amazon_order_id'] = array_get($arrayOrder,'AmazonOrderId','');
-							$insertItemArray['asin'] = array_get($ordersItem,'ASIN','');
-							$insertItemArray['seller_sku'] = array_get($ordersItem,'SellerSKU','');
-							$insertItemArray['order_item_id'] = array_get($ordersItem,'OrderItemId','');
-							$insertItemArray['title'] = array_get($ordersItem,'Title','');
-							$insertItemArray['quantity_ordered'] = intval(array_get($ordersItem,'QuantityOrdered',0));
-							$insertItemArray['quantity_shipped'] = intval(array_get($ordersItem,'QuantityShipped',0));
-							$insertItemArray['gift_wrap_level'] = array_get($ordersItem,'GiftWrapLevel','');
-							$insertItemArray['gift_message_text'] = array_get($ordersItem,'GiftMessageText','');
-							$insertItemArray['item_price_amount'] = round(array_get($ordersItem,'ItemPrice.Amount',0),2);
-							$insertItemArray['item_price_currency_code'] = array_get($ordersItem,'ItemPrice.CurrencyCode','');
-							$insertItemArray['shipping_price_amount'] = round(array_get($ordersItem,'ShippingPrice.Amount',0),2);
-							$insertItemArray['shipping_price_currency_code'] = array_get($ordersItem,'ShippingPrice.CurrencyCode','');
-							$insertItemArray['gift_wrap_price_amount'] = round(array_get($ordersItem,'GiftWrapPrice.Amount',0),2);
-							$insertItemArray['gift_wrap_price_currency_code'] = array_get($ordersItem,'GiftWrapPrice.CurrencyCode','');
-							$insertItemArray['item_tax_amount'] = round(array_get($ordersItem,'ItemTax.Amount',0),2);
-							$insertItemArray['item_tax_currency_code'] = array_get($ordersItem,'ItemTax.CurrencyCode','');
-							$insertItemArray['shipping_tax_amount'] = round(array_get($ordersItem,'ShippingTax.Amount',0),2);
-							$insertItemArray['shipping_tax_currency_code'] = array_get($ordersItem,'ShippingTax.CurrencyCode','');
-							$insertItemArray['gift_wrap_tax_amount'] = round(array_get($ordersItem,'GiftWrapTax.Amount',0),2);
-							$insertItemArray['gift_wrap_tax_currency_code'] = array_get($ordersItem,'GiftWrapTax.CurrencyCode','');
-							$insertItemArray['shipping_discount_amount'] = round(array_get($ordersItem,'ShippingDiscount.Amount',0),2);
-							$insertItemArray['shipping_discount_currency_code'] = array_get($ordersItem,'ShippingDiscount.CurrencyCode','');
-							$insertItemArray['promotion_discount_amount'] = round(array_get($ordersItem,'PromotionDiscount.Amount',0),2);
-							$insertItemArray['promotion_discount_currency_code'] = array_get($ordersItem,'PromotionDiscount.CurrencyCode','');
-							$insertItemArray['promotion_ids'] = serialize(array_get($ordersItem,'PromotionIds',''));
-							$insertItemArray['cod_fee_amount'] = round(array_get($ordersItem,'CODFee.Amount',0),2);
-							$insertItemArray['cod_fee_currency_code'] = array_get($ordersItem,'CODFee.CurrencyCode','');
-							$insertItemArray['cod_fee_discount_amount'] = round(array_get($ordersItem,'CODFeeDiscount.Amount',0),2);
-							$insertItemArray['cod_fee_discount_currency_code'] = array_get($ordersItem,'CODFeeDiscount.CurrencyCode','');
-                            $insertItemData[] = $insertItemArray;
-                        }
-						
 						unset($insertArray);
 						$insertArray['user_id'] = $account->user_id;
                         $insertArray['seller_account_id'] = (string) $account->id;
@@ -189,20 +145,17 @@ class GetOrdersForAccount implements ShouldQueue
 						$insertArray['latest_ship_date'] = array_get($arrayOrder,'LatestShipDate','');
 						$insertArray['earliest_delivery_date'] = array_get($arrayOrder,'EarliestDeliveryDate','');
 						$insertArray['latest_delivery_date'] = array_get($arrayOrder,'LatestDeliveryDate','');
-						$insertArray['order_type'] = array_get($arrayOrder,'OrderType','');
-                        $insertArray['asins'] = $asins;
-                        $insertArray['seller_skus'] = $seller_skus;              
+						$insertArray['order_type'] = array_get($arrayOrder,'OrderType','');           
                         $insertArray['created_at'] = $insertArray['updated_at'] = Carbon::now()->toDateTimeString();
+                        $insertArray['vop_flag']=0;
                         $insertData[] = $insertArray;
                     }
                     //if (count($insertData)>50 || !$notEnd)
                     //{
-						Order::insertOnDuplicateWithDeadlockCatching($insertData,['updated_at','seller_order_id','order_status','buyer_email','buyer_name','purchase_date','purchase_local_date','fulfillment_channel','last_update_date','sales_channel','order_channel','ship_service_level','name','address_line1','address_line2','address_line3','city','county','district','state_or_region','postal_code','country_code','phone','amount','currency_code','number_of_items_shipped','number_of_items_unshipped','payment_method','ship_service_level_category','earliest_ship_date','latest_ship_date','earliest_delivery_date','latest_delivery_date','order_type','asins','seller_skus']);
-						OrderItem::insertOnDuplicateWithDeadlockCatching($insertItemData,['asin','seller_sku','purchase_date','fulfillment_channel','title','quantity_ordered','quantity_shipped','gift_wrap_level','gift_message_text','item_price_amount','item_price_currency_code','shipping_price_amount','shipping_price_currency_code','gift_wrap_price_amount','gift_wrap_price_currency_code','item_tax_amount','item_tax_currency_code','shipping_tax_amount','shipping_tax_currency_code','gift_wrap_tax_amount','gift_wrap_tax_currency_code','shipping_discount_amount','shipping_discount_currency_code','promotion_discount_amount','promotion_discount_currency_code','promotion_ids','cod_fee_amount','cod_fee_currency_code','cod_fee_discount_amount','cod_fee_discount_currency_code']);
-						if($account->last_update_order_date<$lastOrderUpdateDate) $account->last_update_order_date  = $lastOrderUpdateDate;								
-						$insertData = $insertItemData = array();
-						$endTime=microtime(true);
-						if($endTime-$startTime>60*30) $notEnd=false;
+                    if($insertData) Order::insertOnDuplicateWithDeadlockCatching($insertData,['updated_at','seller_order_id','order_status','buyer_email','buyer_name','purchase_date','purchase_local_date','fulfillment_channel','last_update_date','sales_channel','order_channel','ship_service_level','name','address_line1','address_line2','address_line3','city','county','district','state_or_region','postal_code','country_code','phone','amount','currency_code','number_of_items_shipped','number_of_items_unshipped','payment_method','ship_service_level_category','earliest_ship_date','latest_ship_date','earliest_delivery_date','latest_delivery_date','order_type','asins','seller_skus','vop_flag']);
+                    $account->last_update_order_date  = $lastOrderUpdateDate;								
+                    $endTime=microtime(true);
+                    //if($endTime-$startTime>60*60) $notEnd=false;
                     //}
                 } catch (MarketplaceWebServiceOrders_Exception $ex) {
 					$errorMessage = $ex->getMessage();
@@ -214,43 +167,4 @@ class GetOrdersForAccount implements ShouldQueue
 			$account->save();
         }
 	}
-
-    public function getOrderItems($amazonOrderId)
-    {
-        $nextToken = null;
-        $timestamp = null;
-        $orderItems = [];
-        $notEnd = false;
-        do {
-            if ($nextToken) {
-                $request = new MarketplaceWebServiceOrders_Model_ListOrderItemsByNextTokenRequest();
-                $request->setNextToken($nextToken);
-                $resultName = 'ListOrderItemsByNextTokenResult';
-            }
-            else{
-                $request = new MarketplaceWebServiceOrders_Model_ListOrderItemsRequest();
-                $resultName = 'ListOrderItemsResult';
-				$request->setAmazonOrderId($amazonOrderId);
-            }
-            $request->setSellerId($this->account->mws_seller_id);
-            $request->setMWSAuthToken($this->account->mws_auth_token);
-            try {
-                $response = $nextToken?$this->client->listOrderItemsByNextToken($request):$this->client->listOrderItems($request);
-                $objResponse = processResponse($response);
-                $resultResponse = $objResponse->{$resultName};
-                $nextToken = isset($resultResponse->NextToken)?$resultResponse->NextToken:null;
-                $lastOrderItems = isset($resultResponse->OrderItems->OrderItem)?$resultResponse->OrderItems->OrderItem:[];
-                $notEnd = !empty($nextToken);
-                foreach($lastOrderItems as $item)
-                {
-                    $orderItems[] = json_decode(json_encode($item), true);
-                }
-            } catch (MarketplaceWebServiceOrders_Exception $ex) {
-				throw $ex;
-			}
-			sleep(2);
-        }
-        while($notEnd);
-        return $orderItems;
-    }
 }

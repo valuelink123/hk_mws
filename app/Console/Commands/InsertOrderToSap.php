@@ -55,7 +55,7 @@ class InsertOrderToSap extends Command
             ['fulfillment_channel'=>'MFN','order_status'=>'Unshipped'],
         ];
         foreach($pushRules as $rules){
-            $matchOrders = Order::where('last_update_date','>=',$afterDate)->where('last_update_date','<=',$beforeDate);
+            $matchOrders = Order::where('vop_flag',1)->where('last_update_date','>=',$afterDate)->where('last_update_date','<=',$beforeDate);
             if($this->option('sellerAccountId')) $matchOrders=$matchOrders->where('seller_account_id',$this->option('sellerAccountId'));
             foreach($rules as $key=>$val){
                 $matchOrders = $matchOrders->where($key,$val);
