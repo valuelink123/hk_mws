@@ -108,10 +108,12 @@ class GetOrderItemsForAccount implements ShouldQueue
                     $orderUpdate['vop_flag'] = 1; 
                     Order::find($order->id)->update($orderUpdate);
                     $endTime=microtime(true);
-                    if($endTime-$startTime>=60) die();
                 }
             } catch (MarketplaceWebServiceOrders_Exception $ex) {
                 throw $ex;
+            }finally{
+                $account->get_items=NULL;
+                $account->save();
             }
         }
 	}

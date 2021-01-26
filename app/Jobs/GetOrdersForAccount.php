@@ -164,7 +164,7 @@ class GetOrdersForAccount implements ShouldQueue
                 }
                 sleep(60);
 			} while ($notEnd);
-			$account->created_at = NULL;
+			$account->get_lists = NULL;
 			$account->last_action_result  = $errorMessage??('Success '.Carbon::now()->toDateTimeString());
 			$account->save();
         }
