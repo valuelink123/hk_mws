@@ -57,7 +57,7 @@ class GetOrderItemsForAccount implements ShouldQueue
             );
             try {
                 $startTime=microtime(true);
-                $orders = Order::where('seller_account_id',$account->id)->where('vop_flag',0)->take(30)->orderBy('last_update_date','asc')->get();
+                $orders = Order::where('seller_account_id',$account->id)->where('vop_flag',0)->take(30)->orderByRaw("RAND()")>get();
                 foreach($orders as $order){
                     $asins = $seller_skus = Null;
                     $insertItemData = array();
@@ -108,7 +108,7 @@ class GetOrderItemsForAccount implements ShouldQueue
                     $orderUpdate['vop_flag'] = 1; 
                     Order::find($order->id)->update($orderUpdate);
                     $endTime=microtime(true);
-                    if($endTime-$startTime>=60) exit;
+                    if($endTime-$startTime>=60) die();
                 }
             } catch (MarketplaceWebServiceOrders_Exception $ex) {
                 throw $ex;
@@ -123,6 +123,7 @@ class GetOrderItemsForAccount implements ShouldQueue
         $orderItems = [];
         $notEnd = false;
         do {
+            sleep(2);
             if ($nextToken) {
                 $request = new MarketplaceWebServiceOrders_Model_ListOrderItemsByNextTokenRequest();
                 $request->setNextToken($nextToken);
@@ -146,8 +147,6 @@ class GetOrderItemsForAccount implements ShouldQueue
             {
                 $orderItems[] = json_decode(json_encode($item), true);
             }
-            
-			sleep(2);
         }
         while($notEnd);
         return $orderItems;

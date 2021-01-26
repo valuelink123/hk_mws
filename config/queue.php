@@ -54,6 +54,13 @@ return [
 			'queue'  => env('BEANSTALKD_QUEUE','default')."-orders-get",
 			'retry_after' => 86400,
 			'ttr'    => 1200,
+        ],
+        'beanstalkd-orderitems-get' => [
+			'driver' => 'beanstalkd',
+			'host'   => env('BEANSTALKD_HOST','localhost'),
+			'queue'  => env('BEANSTALKD_QUEUE','default')."-orderitems-get",
+			'retry_after' => 300,
+			'ttr'    => 1200,
 		],
 		'beanstalkd-keepa-get' => [
 			'driver' => 'beanstalkd',

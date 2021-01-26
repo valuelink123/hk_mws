@@ -43,7 +43,7 @@ class ScanAmazonOrderItems extends Command
         if($this->option('sellerId')) $sellerAccounts=$sellerAccounts->where('mws_seller_id',$this->option('sellerId'));
 		$sellerAccounts->chunk(10,function($sellers){
             foreach ($sellers as $seller) {
-				GetOrderItemsForAccount::dispatch($seller)->onConnection('beanstalkd-orders-get')->onQueue('beanstalkd-orders-get');
+				GetOrderItemsForAccount::dispatch($seller)->onConnection('beanstalkd-orderitems-get')->onQueue('beanstalkd-orderitems-get');
             }
         });
         
