@@ -197,7 +197,7 @@ class SaveMwsReportData {
 		}
 		if($itemData){
 			AmazonSettlement::insert($data);
-			$chunk_result = array_chunk($itemData, 200);
+			$chunk_result = array_chunk($itemData, 50);
 			foreach($chunk_result as $k=>$v){
 				AmazonSettlementDetail::insert($v);
 			}
@@ -235,7 +235,10 @@ class SaveMwsReportData {
 		}
 		if($skus_updata){
 			FbaDailyInventoryHistoryReport::where('seller_account_id',$account->id)->whereIn('snapshot_date',$date_rand)->delete();
-			FbaDailyInventoryHistoryReport::insert($skus_updata);
+			$chunk_result = array_chunk($skus_updata, 50);
+			foreach($chunk_result as $k=>$v){
+				FbaDailyInventoryHistoryReport::insert($v);
+			}
 		}
 	}
 	public function saveMonthlyInventory(){
@@ -272,7 +275,7 @@ class SaveMwsReportData {
 		}
 		if($skus_updata){
 			FbaMonthlyInventoryHistoryReport::where('seller_account_id',$account->id)->whereIn('month',$date_rand)->delete();
-			$chunk_result = array_chunk($skus_updata, 100);
+			$chunk_result = array_chunk($skus_updata, 50);
 			foreach($chunk_result as $k=>$v){
 				FbaMonthlyInventoryHistoryReport::insert($v);
 			}
@@ -307,7 +310,10 @@ class SaveMwsReportData {
 		}
 		if($skus_updata){
 			FbaReceivedInventoryReport::where('seller_account_id',$account->id)->whereIn('received_date',$date_rand)->delete();
-			FbaReceivedInventoryReport::insert($skus_updata);
+			$chunk_result = array_chunk($skus_updata, 50);
+			foreach($chunk_result as $k=>$v){
+				FbaReceivedInventoryReport::insert($v);
+			}
 		}
 	}
 	public function saveInventoryReserved(){
@@ -382,7 +388,10 @@ class SaveMwsReportData {
 		}
 		if($skus_updata){
 			FbaInventoryAdjustmentsReport::where('seller_account_id',$account->id)->whereIn('adjusted_date',$date_rand)->delete();
-			FbaInventoryAdjustmentsReport::insert($skus_updata);
+			$chunk_result = array_chunk($skus_updata, 50);
+			foreach($chunk_result as $k=>$v){
+				FbaInventoryAdjustmentsReport::insert($v);
+			}
 		}
 	}
 	public function saveInventoryHealth(){
@@ -493,7 +502,10 @@ class SaveMwsReportData {
 		}
 		if($skus_updata){
 			FbaInventoryHealthReport::where('seller_account_id',$account->id)->whereIn('snapshot_date',$date_rand)->delete();
-			FbaInventoryHealthReport::insert($skus_updata);
+			$chunk_result = array_chunk($skus_updata, 50);
+			foreach($chunk_result as $k=>$v){
+				FbaInventoryHealthReport::insert($v);
+			}
 		}
 	}
 	
@@ -702,7 +714,10 @@ class SaveMwsReportData {
 		}
 		if($skus_updata){
 			FbaStrandedInventoryReport::where('seller_account_id',$account->id)->delete();
-			FbaStrandedInventoryReport::insert($skus_updata);
+			$chunk_result = array_chunk($skus_updata, 50);
+			foreach($chunk_result as $k=>$v){
+				FbaStrandedInventoryReport::insert($v);
+			}
 		}
 	}
 	public function saveInventoryBulkFixStranded(){
@@ -753,7 +768,10 @@ class SaveMwsReportData {
 		}
 		if($skus_updata){
 			FbaBulkFixStrandedInventoryReport::where('seller_account_id',$account->id)->delete();
-			FbaBulkFixStrandedInventoryReport::insert($skus_updata);
+			$chunk_result = array_chunk($skus_updata, 50);
+			foreach($chunk_result as $k=>$v){
+				FbaBulkFixStrandedInventoryReport::insert($v);
+			}
 		}
 	}
 	public function saveEuInventory(){
@@ -1071,7 +1089,10 @@ class SaveMwsReportData {
 		}
 		if($skus_updata){
 			FbaInventoryEventDetailReport::where('seller_account_id',$account->id)->whereIn('snapshot_date',$date_rand)->delete();
-			FbaInventoryEventDetailReport::insert($skus_updata);
+			$chunk_result = array_chunk($skus_updata, 50);
+			foreach($chunk_result as $k=>$v){
+				FbaInventoryEventDetailReport::insert($v);
+			}
 		}
 	}
 
