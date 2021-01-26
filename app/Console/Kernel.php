@@ -35,6 +35,7 @@ class Kernel extends ConsoleKernel
 		'App\Console\Commands\CalculateMrp',
         'App\Console\Commands\ScanAmazonShipments',
         'App\Console\Commands\ScanSettlement',
+        'App\Console\Commands\InsertOrderToSap',
     ];
 
     /**
@@ -108,7 +109,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('cal:dailydata')->dailyAt('7:00')->name('CAL_DAILY')->sendOutputTo($DailyDataLogPath)->withoutOverlapping();
 		$schedule->command('sync:rates')->dailyAt('4:00')->name('SYNC_RATES')->withoutOverlapping();
 		$schedule->command('cal:asinInventory')->hourly()->name('CAL_ASININVENTORY')->withoutOverlapping();
-		$schedule->command('cal:mrp')->dailyAt('14:00')->name('CAL_MRP')->withoutOverlapping();
+		$schedule->command('push:order')->hourly()->name('OrderToSap')->withoutOverlapping();
 		
     }
 
