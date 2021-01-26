@@ -38,7 +38,7 @@ class GetOrdersForAccount implements ShouldQueue
 		$this->account = $account;
 		$afterDate_init = ($account->last_update_order_date)??date('Y-m-d H:i:s', strtotime('-1 day'));
         $this->afterDate = $afterDate??$afterDate_init;
-        $this->beforeDate = ($beforeDate)?$beforeDate:date('Y-m-d H:i:s', strtotime('-1 hour'));
+		$this->beforeDate = ($beforeDate)?$beforeDate:date('Y-m-d H:i:s', strtotime('-1 hour'));
 	}
 
     /**
@@ -50,6 +50,7 @@ class GetOrdersForAccount implements ShouldQueue
 	{
         $account = $this->account;
         if ($account) {
+			$startTime=microtime(true); 
             $siteConfig = getSiteConfig();
             $this->client = new MarketplaceWebServiceOrders_Client(
                 $account->mws_access_keyid,
@@ -294,7 +295,9 @@ class GetOrdersForAccount implements ShouldQueue
 						if($sapInsertItemData) SapOrderItem::insertIgnore($sapInsertItemData);
 						if($sapInsertData) SapOrder::insertIgnore($sapInsertData);
 						$account->last_update_order_date  = $lastOrderUpdateDate;									
-                        $insertData = $insertItemData = $sapInsertItemData = $sapInsertData = array();
+						$insertData = $insertItemData = $sapInsertItemData = $sapInsertData = array();
+						$endTime=microtime(true);
+						if($endTime-$startTime>60*30) $notEnd=false;
                     }
                 } catch (MarketplaceWebServiceOrders_Exception $ex) {
 					$errorMessage = $ex->getMessage();
