@@ -60,7 +60,7 @@ class InsertOrderToSap extends Command
             foreach($rules as $key=>$val){
                 $matchOrders = $matchOrders->where($key,$val);
             }
-            $matchOrders->chunk(10,function($orders){
+            $matchOrders->chunk(10,function($orders) use ($sellerAccountId){
                 $sapInsertItemData = $sapInsertData = [];
                 foreach ($orders as $order) {
                     $order=json_decode(json_encode($order),true);
