@@ -79,6 +79,7 @@ class GetOrdersForAccount implements ShouldQueue
 			$siteLocalTimeDiff['Amazon.nl']= 2*3600;
 			$siteLocalTimeDiff['Amazon.se']= 2*3600;
             do {
+                sleep(60);
                 if ($nextToken) {
                     $request = new MarketplaceWebServiceOrders_Model_ListOrdersByNextTokenRequest();
                     $request->setNextToken($nextToken);
@@ -96,6 +97,7 @@ class GetOrdersForAccount implements ShouldQueue
                 $request->setMWSAuthToken($account->mws_auth_token);
 
                 try {
+                    
                     $response = $nextToken?$this->client->listOrdersByNextToken($request):$this->client->listOrders($request);
                     $objResponse = processResponse($response);
                     $resultResponse = $objResponse->{$resultName};
@@ -155,14 +157,13 @@ class GetOrdersForAccount implements ShouldQueue
                     if($insertData) Order::insertOnDuplicateWithDeadlockCatching($insertData,['updated_at','seller_order_id','order_status','buyer_email','buyer_name','purchase_date','purchase_local_date','fulfillment_channel','last_update_date','sales_channel','order_channel','ship_service_level','name','address_line1','address_line2','address_line3','city','county','district','state_or_region','postal_code','country_code','phone','amount','currency_code','number_of_items_shipped','number_of_items_unshipped','payment_method','ship_service_level_category','earliest_ship_date','latest_ship_date','earliest_delivery_date','latest_delivery_date','order_type','asins','seller_skus','vop_flag']);
                     $account->last_update_order_date  = $lastOrderUpdateDate;								
                     $endTime=microtime(true);
-                    
                     //if($endTime-$startTime>60*60) $notEnd=false;
                     //}
                 } catch (MarketplaceWebServiceOrders_Exception $ex) {
 					$errorMessage = $ex->getMessage();
 					$notEnd = false;
                 }
-                sleep(60);
+                
 			} while ($notEnd);
 			$account->get_lists = NULL;
 			$account->last_action_result  = $errorMessage??('Success '.Carbon::now()->toDateTimeString());
