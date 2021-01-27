@@ -66,7 +66,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('sym:asins')->weekly()->mondays()->at('0:30')->name('SYM_ASINS')->sendOutputTo($SymAsinsLogPath)->withoutOverlapping();
 		
 		$schedule->command('scan:orders')->cron('*/20 * * * *')->name('GET_ORDERS')->sendOutputTo($ordersLogPath)->withoutOverlapping();
-		
+        $schedule->command('scan:orderItems')->everyMinute()->name('GET_ORDERITEMS')->withoutOverlapping();
+        
 		$schedule->command('scan:stock')->twiceDaily(2, 6)->name('GET_STOCK')->sendOutputTo($stockLogPath)->withoutOverlapping();
 		
 		$schedule->command('scan:mcforders')->twiceDaily(3, 8)->name('GET_MCFORDERS')->sendOutputTo($mcfLogPath)->withoutOverlapping();
@@ -110,7 +111,7 @@ class Kernel extends ConsoleKernel
 		$schedule->command('sync:rates')->dailyAt('4:00')->name('SYNC_RATES')->withoutOverlapping();
 		$schedule->command('cal:asinInventory')->hourly()->name('CAL_ASININVENTORY')->withoutOverlapping();
         $schedule->command('push:order')->hourly()->name('OrderToSap')->withoutOverlapping();
-        $schedule->command('scan:orderItems')->everyMinute()->name('GET_ORDERITEMS')->withoutOverlapping();
+        
 		
     }
 
