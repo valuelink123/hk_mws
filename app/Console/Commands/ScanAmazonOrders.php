@@ -41,13 +41,13 @@ class ScanAmazonOrders extends Command
         $this->info('Scan orders started');
         $sellerAccounts = SellerAccounts::whereNull('deleted_at')->whereNull('get_lists');
         if($this->option('sellerId')) $sellerAccounts=$sellerAccounts->where('mws_seller_id',$this->option('sellerId'));
-		$sellerAccounts->chunk(10,function($sellers){
-            foreach ($sellers as $seller) {
-                $seller->get_lists=date("Y-m-d H:i:s");
-                $seller->save();
-				GetOrdersForAccount::dispatch($seller,$this->option('afterDate'),$this->option('beforeDate'))->onConnection('beanstalkd-orders-get')->onQueue('beanstalkd-orders-get');
-            }
-        });
+        $sellers = $sellerAccounts->get();
+        foreach ($sellers as $seller) {
+            $seller->get_lists=date("Y-m-d H:i:s");
+            $seller->save();
+            GetOrdersForAccount::dispatch($seller,$this->option('afterDate'),$this->option('beforeDate'))->onConnection('beanstalkd-orders-get')->onQueue('beanstalkd-orders-get');
+        }
+        
         
     }
 }
