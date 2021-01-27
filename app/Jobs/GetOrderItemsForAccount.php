@@ -57,7 +57,7 @@ class GetOrderItemsForAccount implements ShouldQueue
             );
             try {
                 $startTime=microtime(true);
-                $orders = Order::where('seller_account_id',$account->id)->where('vop_flag',0)->take(30)->orderBy('updated_at','desc')->get();
+                $orders = Order::where('seller_account_id',$account->id)->where('vop_flag',0)->take(30)->orderBy('updated_at','asc')->get();
                 foreach($orders as $order){
                     $asins = $seller_skus = Null;
                     $insertItemData = array();
