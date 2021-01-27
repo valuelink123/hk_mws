@@ -90,13 +90,9 @@ class GetReport implements ShouldQueue
 					$responseStr = stream_get_contents($fileHandle);
 					@fclose($fileHandle);
 					ob_end_clean();
-					/*
 					if($account->mws_seller_id=='A1VC38T7YXB528'){
-						$responseStr = iconv("Shift_JIS","UTF-8//IGNORE",$responseStr) ;
-					}else{
-						$responseStr = iconv("latin1","UTF-8//IGNORE",$responseStr) ;
+						$responseStr = iconv("ISO-8859-1","UTF-8//IGNORE",$responseStr);
 					}
-					*/
 					$res = csv_to_array($responseStr, PHP_EOL, "\t");
 					$this->requestReport->report_id=$reportId;
 					$this->requestReport->response=json_encode($res);
