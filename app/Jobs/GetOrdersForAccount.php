@@ -154,7 +154,7 @@ class GetOrdersForAccount implements ShouldQueue
                     }
                     //if (count($insertData)>50 || !$notEnd)
                     //{
-                    if($insertData) Order::insertOnDuplicateWithDeadlockCatching($insertData,['updated_at','seller_order_id','order_status','buyer_email','buyer_name','purchase_date','purchase_local_date','fulfillment_channel','last_update_date','sales_channel','order_channel','ship_service_level','name','address_line1','address_line2','address_line3','city','county','district','state_or_region','postal_code','country_code','phone','amount','currency_code','number_of_items_shipped','number_of_items_unshipped','payment_method','ship_service_level_category','earliest_ship_date','latest_ship_date','earliest_delivery_date','latest_delivery_date','order_type','asins','seller_skus','vop_flag']);
+                    if($insertData) Order::insertOnDuplicateWithDeadlockCatching($insertData,['updated_at','seller_order_id','order_status','buyer_email','buyer_name','purchase_date','purchase_local_date','fulfillment_channel','last_update_date','sales_channel','order_channel','ship_service_level','name','address_line1','address_line2','address_line3','city','county','district','state_or_region','postal_code','country_code','phone','amount','currency_code','number_of_items_shipped','number_of_items_unshipped','payment_method','ship_service_level_category','earliest_ship_date','latest_ship_date','earliest_delivery_date','latest_delivery_date','order_type','vop_flag']);
                     $account->last_update_order_date  = $lastOrderUpdateDate;
                     $account->save();			
                     $endTime=microtime(true);

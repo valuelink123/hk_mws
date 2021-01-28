@@ -80,7 +80,7 @@ class InsertOrderToSap extends Command
                         $sapInsertItemData[] = $data;
                     }
 
-                    foreach(['id','user_id','seller_account_id','purchase_local_date','created_at','updated_at','order_type','asins','seller_skus'] as $key){
+                    foreach(['id','user_id','seller_account_id','purchase_local_date','created_at','updated_at','order_type','asins','seller_skus','vop_flag'] as $key){
                         unset($order[$key]);
                     }
                     $fields = array_merge($account,$order);
