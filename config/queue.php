@@ -45,14 +45,14 @@ return [
 			'driver' => 'beanstalkd',
 			'host'   => env('BEANSTALKD_HOST','localhost'),
 			'queue'  => env('BEANSTALKD_QUEUE','default'),
-			'retry_after' => 86400,
+			'retry_after' => 2000,
 			'ttr'    => 1200,
 		],
 		'beanstalkd-orders-get' => [
 			'driver' => 'beanstalkd',
 			'host'   => env('BEANSTALKD_HOST','localhost'),
 			'queue'  => env('BEANSTALKD_QUEUE','default')."-orders-get",
-			'retry_after' => 86400,
+			'retry_after' => 2000,
 			'ttr'    => 1200,
         ],
         'beanstalkd-orderitems-get' => [
@@ -73,7 +73,14 @@ return [
 			'driver' => 'beanstalkd',
 			'host'   => env('BEANSTALKD_HOST','localhost'),
 			'queue'  => env('BEANSTALKD_QUEUE','default')."-shedule-get",
-			'retry_after' => 86400,
+			'retry_after' => 2000,
+			'ttr'    => 1200,
+        ],
+        'beanstalkd-sap-put' => [
+			'driver' => 'beanstalkd',
+			'host'   => env('BEANSTALKD_HOST','localhost'),
+			'queue'  => env('BEANSTALKD_QUEUE','default')."-sap-put",
+			'retry_after' => 300,
 			'ttr'    => 1200,
 		],
 

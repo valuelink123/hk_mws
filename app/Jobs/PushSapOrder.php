@@ -102,9 +102,11 @@ class PushSapOrder implements ShouldQueue
             } catch (Exception $ex) {
                 throw $ex;
             }finally{
-                flock($fp,LOCK_UN);  
+                flock($fp,LOCK_UN); 
+                fclose($fp); 
             }
+        }else{
+            fclose($fp);
         }
-        fclose($fp);
     }
 }

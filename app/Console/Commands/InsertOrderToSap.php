@@ -36,6 +36,6 @@ class InsertOrderToSap extends Command
      */
     public function handle()
     {
-        PushSapOrder::dispatch()->onConnection('beanstalkd-shedule-get')->onQueue('beanstalkd-shedule-get');
+        PushSapOrder::dispatch()->onConnection('beanstalkd-sap-put')->onQueue('beanstalkd-sap-put');
     }
 }
