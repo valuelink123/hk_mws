@@ -515,3 +515,13 @@ function intercept(array $y_ls, array $x_ls)
     $rate = slope($y_ls, $x_ls);
     return sub($avg_y, mul($rate, $avg_x), 7);
 }
+
+function removeAsin($sellerId,$asin){
+    if($sellerId == 'A386LX6UH3N4GU' && in_array($asin,['B07JKSL8D3','B079L4TRW1','B074W6P8XG','B07JKS27KD','B07H29G5CJ','B07XDFB5CZ','B07K47LYBT','B07K4BFKYJ','B07K3Z2426','B07K3XYJX4','B07K45QG6D','B07K3V9LY9','B07K47BR5Q','B07K438DJC','B07K43ZQ34','B07K47MMYX','B07K3RVRPX','B07JMV994B','B07JM1LXXG','B07JMVKBCB','B074W6P8XG'])) return true;
+    if($sellerId == 'A3S03OCOL3LXVH' && in_array($asin,['B0822X2FK6','B082NMZM23','B082QW3NDN','B082QRV83W','B082QP6KCJ','B083QBJCY8','B083QBSJVY','B083QC6C62','B083QBWKK8','B083QBVS6B','B083QC4GHB','B083QBZWR5','B083QBCHZG'])) return true;
+    if($sellerId == 'A2BDHRNM8A41K8' && in_array($asin,['B08F25FJLQ'])) return true;
+    if($sellerId == 'A3I3SZVYDM6YOH' && in_array($asin,['B08FJ9X3F7'])) return true;
+    if($sellerId == 'AN5UX6HRRCZZB' && in_array($asin,['B08F25FJLQ'])) return true;
+    if($sellerId == 'A1P441X6YWJXLC' && in_array($asin,['B086V7QBJG'])) return true;
+    return false;
+}
