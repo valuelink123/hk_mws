@@ -89,13 +89,9 @@ class GetSettlement implements ShouldQueue
                         $responseStr = stream_get_contents($fileHandle);
                         @fclose($fileHandle);
                         ob_end_clean();
-                        /*
-                        if($account->mws_seller_id=='A1VC38T7YXB528'){
-                            $responseStr = iconv("Shift_JIS","UTF-8//IGNORE",$responseStr) ;
-                        }else{
-                            $responseStr = iconv("latin1","UTF-8//IGNORE",$responseStr) ;
+                        if($account->mws_marketplaceid=='A1VC38T7YXB528'){
+                            $responseStr = iconv("ISO-8859-1","UTF-8//IGNORE",$responseStr);
                         }
-                        */
                         $res = csv_to_array($responseStr, chr(10), chr(9));
                         $obj = new SaveMwsReportData($account, $this->report_type, $res);
                         $obj->save();

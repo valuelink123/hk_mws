@@ -47,7 +47,5 @@ class ScanAmazonOrders extends Command
             $seller->save();
             GetOrdersForAccount::dispatch($seller,$this->option('afterDate'),$this->option('beforeDate'))->onConnection('beanstalkd-orders-get')->onQueue('beanstalkd-orders-get');
         }
-        
-        
     }
 }
