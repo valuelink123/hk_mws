@@ -90,7 +90,7 @@ class GetReport implements ShouldQueue
 					$responseStr = stream_get_contents($fileHandle);
 					@fclose($fileHandle);
 					ob_end_clean();
-					if($account->mws_seller_id=='A1VC38T7YXB528'){
+					if($account->mws_marketplaceid=='A1VC38T7YXB528'){
 						$responseStr = iconv("ISO-8859-1","UTF-8//IGNORE",$responseStr);
 					}
 					$res = csv_to_array($responseStr, PHP_EOL, "\t");
