@@ -82,11 +82,12 @@ class PushSapOrder implements ShouldQueue
                             continue;
                         }
                         $orderLists[] = $order['amazon_order_id'];
+						$order['api_download_date'] = $order['created_at'];
                         foreach(['id','user_id','seller_account_id','purchase_local_date','created_at','updated_at','order_type','asins','seller_skus','vop_flag','sap_imported'] as $key){
                             unset($order[$key]);
                         }
                         $fields = array_merge($account,$order);
-                        $data = [];
+                        
                         foreach($fields as $field=>$value){
                             $data[str_replace(' ','',ucwords(str_replace('_', ' ', $field)))] = $value;
                         }
