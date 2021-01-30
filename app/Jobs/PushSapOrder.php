@@ -88,6 +88,8 @@ class PushSapOrder implements ShouldQueue
                         }
                         $fields = array_merge($account,$order);
                         
+                        $data=[];
+
                         foreach($fields as $field=>$value){
                             $data[str_replace(' ','',ucwords(str_replace('_', ' ', $field)))] = $value;
                         }
