@@ -34,6 +34,7 @@ class PushSapOrder implements ShouldQueue
      */
     public function handle()
     {
+        set_time_limit(180);
         $logFile = storage_path('logs/pushSap-'.date('Y-m-d').'.log');
         $fp = fopen($logFile,"a+");
         if (flock($fp, LOCK_EX | LOCK_NB)) {
@@ -49,7 +50,7 @@ class PushSapOrder implements ShouldQueue
                 $matchOrders = Order::where('vop_flag',1)
                 ->where('sap_imported',0)
                 ->whereRaw("((fulfillment_channel='AFN' and order_status='Shipped') or (fulfillment_channel='MFN' and order_status='Unshipped'))")
-                ->orderBy('last_update_date','asc')
+                //->orderBy('last_update_date','asc')
                 ->take(100)->get()->toArray();
                 $matchOrders = array_chunk( $matchOrders , 10);
                 foreach($matchOrders as $orders){
@@ -87,7 +88,7 @@ class PushSapOrder implements ShouldQueue
                             unset($order[$key]);
                         }
                         $fields = array_merge($account,$order);
-                        
+
                         $data=[];
 
                         foreach($fields as $field=>$value){
