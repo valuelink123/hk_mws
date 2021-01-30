@@ -8,7 +8,7 @@ class Order extends Model {
     use  ExtendedMysqlQueries;
 
     protected $table = 'orders';
-    protected $hidden = ['created_at','updated_at'];
+    protected $hidden = ['updated_at'];
     protected $guarded = [];
 
 }
