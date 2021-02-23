@@ -67,7 +67,7 @@ class Kernel extends ConsoleKernel
 		
 		$schedule->command('scan:orders')->cron('*/20 * * * *')->name('GET_ORDERS')->sendOutputTo($ordersLogPath)->withoutOverlapping();
         $schedule->command('scan:orderItems')->everyMinute()->name('GET_ORDERITEMS')->withoutOverlapping();
-        $schedule->command('push:order')->everyMinute()->name('OrderToSap')->withoutOverlapping();
+        //$schedule->command('push:order')->everyMinute()->name('OrderToSap')->withoutOverlapping();
         
 		$schedule->command('scan:stock')->twiceDaily(2, 6)->name('GET_STOCK')->sendOutputTo($stockLogPath)->withoutOverlapping();
 		
@@ -103,7 +103,7 @@ class Kernel extends ConsoleKernel
 		$schedule->command('get:report')->everyFiveMinutes()->name('GET_REPORTS')->sendOutputTo($reportLogPath)->withoutOverlapping();
 		$schedule->command('scan:payments')->hourly()->name('GET_PAYPAL_PAYMENTS')->sendOutputTo($PaypalLogPath)->withoutOverlapping();
         $schedule->command('sync:asins')->everyTenMinutes()->name('SYNC_ASINS')->sendOutputTo($SapDataSyncLogPath)->withoutOverlapping();//->twiceDaily(1, 5)
-		$schedule->command('sync:skusite')->dailyAt('0:01')->name('SYNC_SKUSITES')->sendOutputTo($SapDataSyncLogPath)->withoutOverlapping();
+		$schedule->command('sync:skusite')->dailyAt('0:15')->name('SYNC_SKUSITES')->sendOutputTo($SapDataSyncLogPath)->withoutOverlapping();
 		$schedule->command('sync:skus --afterDate='.date('Y-m-d',strtotime('-1day')).' --beforeDate='.date('Y-m-d',strtotime('+1day')))->twiceDaily(11, 23)->name('SYNC_SKUS')->sendOutputTo($SapDataSyncLogPath)->withoutOverlapping();
 		
 		$schedule->command('sync:purchaserecords --afterDate='.date('Y-m-d',strtotime('-1day')).' --beforeDate='.date('Y-m-d',strtotime('+1day')))->twiceDaily(1, 5)->name('SYNC_PURCHASE_RECORDS')->sendOutputTo($SapDataSyncLogPath)->withoutOverlapping();
