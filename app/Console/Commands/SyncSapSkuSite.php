@@ -75,6 +75,7 @@ class SyncSapSkuSite extends Command
         $data['postdata']['TABLE']=array('RESULT_TABLE'=>array(0));
         $data['postdata']['IMPORT']=array('IM_PARAM'=>$date);
         $res = $sap->ZMM_GET_MATERIAL_PLANT_STOCK($data);
+        $last_date = SkuForUser::selectRaw('max(date) as date')->where('producter','>',0)->value('date');
         if(array_get($res,'ack')==1 && array_get($res,'data.O_RETURN')=='S'){
             $lists = array_get($res,'data.RESULT_TABLE');
             foreach($lists as $list){
@@ -102,7 +103,7 @@ class SyncSapSkuSite extends Command
                     'updated_at'=> $requestTime
                     ]
                 );
-                $last_datas = SkuForUser::where('sku',$sku)->where('marketplace_id',$marketplace_id)->where('date',date('Y-m-d',strtotime($requestTime)-86400))
+                $last_datas = SkuForUser::where('sku',$sku)->where('marketplace_id',$marketplace_id)->where('date',$last_date)
                 ->get(['producter','planer','dqe','te'])->first();
 				$last_datas = empty($last_datas)?[]:$last_datas->toArray();
                 $last_datas['description'] = SapSku::where('sku',$sku)->value('description');
