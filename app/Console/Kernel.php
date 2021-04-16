@@ -36,6 +36,9 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\ScanAmazonShipments',
         'App\Console\Commands\ScanSettlement',
         'App\Console\Commands\InsertOrderToSap',
+        'App\Console\Commands\GetProductForAsin',
+        'App\Console\Commands\GetPriceForAsin',
+        'App\Console\Commands\GetCategoriesForAsin',
     ];
 
     /**
@@ -72,6 +75,10 @@ class Kernel extends ConsoleKernel
 		$schedule->command('scan:stock')->twiceDaily(2, 6)->name('GET_STOCK')->sendOutputTo($stockLogPath)->withoutOverlapping();
 		
 		$schedule->command('scan:mcforders')->twiceDaily(3, 8)->name('GET_MCFORDERS')->sendOutputTo($mcfLogPath)->withoutOverlapping();
+
+        $schedule->command('get:product')->twiceDaily(1, 6)->name('GET_PRODUCT')->withoutOverlapping();
+        $schedule->command('get:category')->twiceDaily(1, 6)->name('GET_CATEGORY')->withoutOverlapping();
+        $schedule->command('get:price')->twiceDaily(1, 6)->name('GET_PRICE')->withoutOverlapping();
 		
 		$schedule->command('scan:finances')->dailyAt('5:00')->name('GET_FINANCES')->sendOutputTo($financesLogPath)->withoutOverlapping();
 		

@@ -777,7 +777,7 @@ class SaveMwsReportData {
 	public function saveEuInventory(){
 		$account = $this->account;
 		$match_seller_account_id = SellerAccounts::where('mws_seller_id',$account->mws_seller_id)->pluck('id','mws_marketplaceid')->toArray();
-		$skus_updata=$asins_data =[];
+		$skus_updata=$asins_data = $sellerAsins = [];
 		$clearData = array(
 			'updated_at'=>Carbon::now()->toDateTimeString(),
 			'mfn'=>0,
@@ -830,14 +830,19 @@ class SaveMwsReportData {
 				'asin' => $asin,
 				'marketplaceid' => $marketplace_id
 			);
+			$sellerAsins[] = array(
+				'asin' => $asin,
+				'seller_account_id' => array_get($match_seller_account_id,$marketplace_id,$account->id)
+			);
 		}
 		SellerSku::insertOnDuplicateWithDeadlockCatching($skus_updata,['mfn','mfn_sellable','afn','afn_sellable','afn_unsellable','afn_total','afn_transfer','afn_reserved','updated_at']);
 		Asin::insertIgnore($asins_data);
 		SellerSku::whereIn('seller_account_id',array_values($match_seller_account_id))->where('updated_at','<',$this->requestTime)->update($clearData);
+		SellerAsin::insertIgnore($sellerAsins);
 	}
 	public function saveInventory(){
 		$account = $this->account;
-		$skus_updata=$asins_data =[];
+		$skus_updata=$asins_data = $sellerAsins = [];
 		$clearData = array(
 			'updated_at'=>Carbon::now()->toDateTimeString(),
 			'mfn'=>0,
@@ -849,7 +854,7 @@ class SaveMwsReportData {
 			'afn_total'=>0,
 			'afn_transfer'=>0
 		);
-		
+		$siteDatas = SellerAccounts::where('mws_seller_id',$account->mws_seller_id)->WhereNull('deleted_at')->get();
 		foreach ($this->resources as $info)
 		{
 			$sku = current($info);
@@ -894,10 +899,17 @@ class SaveMwsReportData {
 					}	
 				}
 			}
+			foreach($siteDatas as $siteData){
+				$sellerAsins[] = array(
+					'asin' => $asin,
+					'seller_account_id' => $siteData->id,
+				);
+			}
 		}
 		SellerSku::insertOnDuplicateWithDeadlockCatching($skus_updata,['mfn','mfn_sellable','afn','afn_sellable','afn_unsellable','afn_total','afn_transfer','afn_reserved','updated_at']);
 		Asin::insertIgnore($asins_data);
 		SellerSku::where('seller_account_id',$account->id)->where('updated_at','<',$this->requestTime)->update($clearData);
+		SellerAsin::insertIgnore($sellerAsins);
 	}
 
 
