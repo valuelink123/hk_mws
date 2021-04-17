@@ -3,6 +3,7 @@ namespace App\Classes;
 use App\SellerAccounts;
 use App\Asin;
 use App\SellerSku;
+use App\SellerAsin;
 use App\AmazonReturn;
 use App\FbaAmazonFulfilledInventoryReport;
 use App\FbaManageInventoryArchived;
