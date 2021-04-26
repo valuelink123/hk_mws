@@ -55,6 +55,7 @@ class GetMyPriceForASIN implements ShouldQueue
             $marketPlaceId = $account->mws_marketplaceid;
             try {
                 $asins = SellerAsin::where('seller_account_id',$account->id)->get();
+                $date = date('Y-m-d');
                 foreach($asins as $asin){
                     $request = new \MarketplaceWebServiceProducts_Model_GetMyPriceForASINRequest();
                     $request->setMarketplaceId($account->mws_marketplaceid);
@@ -82,6 +83,7 @@ class GetMyPriceForASIN implements ShouldQueue
                                     [
                                         'seller_asin_id'=>$asin->id,
                                         'seller_sku'=>array_get($offer,'SellerSKU'),
+                                        'date'=>$date,
                                     ],
                                     [
                                         'fulfillment_channel'=>array_get($offer,'FulfillmentChannel'),

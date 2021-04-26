@@ -56,6 +56,7 @@ class GetMatchingProduct implements ShouldQueue
             $marketPlaceId = $account->mws_marketplaceid;
             try {
                 $asins = SellerAsin::where('seller_account_id',$account->id)->get();
+                $date = date('Y-m-d');
                 foreach($asins as $asin){
                     $request = new \MarketplaceWebServiceProducts_Model_GetMatchingProductRequest();
                     $request->setMarketplaceId($account->mws_marketplaceid);
@@ -117,6 +118,7 @@ class GetMatchingProduct implements ShouldQueue
                                     [
                                         'seller_asin_id'=>$asin->id,
                                         'asin'=>$asinRelationship,
+                                        'date'=>$date,
                                     ],
                                     [
                                         'attributes'=>$attribute
@@ -124,7 +126,7 @@ class GetMatchingProduct implements ShouldQueue
                                 );
                                 $reserveIds[] = $result->id;
                             }
-                            SellerAsinRelationship::where('seller_asin_id',$asin->id)->whereNotIn('id',$reserveIds)->delete();
+                            //SellerAsinRelationship::where('seller_asin_id',$asin->id)->whereNotIn('id',$reserveIds)->delete();
                         }
 
                         if(!empty($salesRankings)){
@@ -134,6 +136,7 @@ class GetMatchingProduct implements ShouldQueue
                                     [
                                         'seller_asin_id'=>$asin->id,
                                         'product_category_id'=>$salesRank->ProductCategoryId,
+                                        'date'=>$date,
                                     ],
                                     [
                                         'rank'=>$salesRank->Rank
@@ -141,7 +144,7 @@ class GetMatchingProduct implements ShouldQueue
                                 );
                                 $reserveIds[] = $result->id;
                             }
-                            SellerAsinRanking::where('seller_asin_id',$asin->id)->whereNotIn('id',$reserveIds)->delete();
+                            //SellerAsinRanking::where('seller_asin_id',$asin->id)->whereNotIn('id',$reserveIds)->delete();
                         }
                     }
                 }
