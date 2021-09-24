@@ -17,6 +17,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Log;
 
 class GetOrderItemsForAccount implements ShouldQueue
 {
@@ -29,10 +30,10 @@ class GetOrderItemsForAccount implements ShouldQueue
      */
     protected $account;
 
-	public function __construct($account)
-	{
-		$this->account = $account;
-	}
+        public function __construct($account)
+        {
+                $this->account = $account;
+        }
 
     /**
      * Execute the job.
@@ -40,7 +41,7 @@ class GetOrderItemsForAccount implements ShouldQueue
      * @return void
      */
     public function handle()
-	{
+        {
         $account = $this->account;
         if ($account) {
             $siteConfig = getSiteConfig();
@@ -62,10 +63,13 @@ class GetOrderItemsForAccount implements ShouldQueue
                     $asins = $seller_skus = Null;
                     $insertItemData = array();
                     $arrayOrderItems = self::getOrderItems($order->amazon_order_id);
+                    if($account->id == 147){
+                       Log::info($arrayOrderItems);
+                    }
                     foreach($arrayOrderItems as $ordersItem){
                         unset($insertItemArray);
                         $asins.=array_get($ordersItem,'ASIN').'*'.array_get($ordersItem,'QuantityOrdered').';';
-                        $seller_skus.=array_get($ordersItem,'SellerSKU').'*'.array_get($ordersItem,'QuantityOrdered').';';	
+                        $seller_skus.=array_get($ordersItem,'SellerSKU').'*'.array_get($ordersItem,'QuantityOrdered').';';
                         $insertItemArray['user_id'] = $account->user_id;
                         $insertItemArray['seller_account_id'] = (string) $account->id;
                         $insertItemArray['purchase_date'] = $order->purchase_date;
@@ -116,7 +120,7 @@ class GetOrderItemsForAccount implements ShouldQueue
                 $account->save();
             }
         }
-	}
+        }
 
     public function getOrderItems($amazonOrderId)
     {
@@ -134,7 +138,7 @@ class GetOrderItemsForAccount implements ShouldQueue
             else{
                 $request = new MarketplaceWebServiceOrders_Model_ListOrderItemsRequest();
                 $resultName = 'ListOrderItemsResult';
-				$request->setAmazonOrderId($amazonOrderId);
+                                $request->setAmazonOrderId($amazonOrderId);
             }
             $request->setSellerId($this->account->mws_seller_id);
             $request->setMWSAuthToken($this->account->mws_auth_token);

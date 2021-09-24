@@ -43,6 +43,7 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
+
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
@@ -62,6 +63,7 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
+
 
         'pgsql' => [
             'driver' => 'pgsql',
@@ -90,7 +92,7 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
         ],
-		'sapMiddleWare' => [
+                'sapMiddleWare' => [
             'driver' => 'mysql',
             'host' => env('DB_SAPMIDDLEWARE_HOST', '127.0.0.1'),
             'port' => env('DB_SAPMIDDLEWARE_PORT', '3306'),

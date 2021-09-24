@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Jobs\GetOrdersForAccount;
 use App\SellerAccounts;
+use Log;
 class ScanAmazonOrders extends Command
 {
     /**
@@ -42,6 +43,7 @@ class ScanAmazonOrders extends Command
         $sellerAccounts = SellerAccounts::whereNull('deleted_at')->whereNull('get_lists');
         if($this->option('sellerId')) $sellerAccounts=$sellerAccounts->where('mws_seller_id',$this->option('sellerId'));
         $sellers = $sellerAccounts->get();
+        Log::info($sellers);
         foreach ($sellers as $seller) {
             $seller->get_lists=date("Y-m-d H:i:s");
             $seller->save();

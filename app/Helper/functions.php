@@ -522,6 +522,6 @@ function removeAsin($sellerId,$asin){
     if($sellerId == 'A2BDHRNM8A41K8' && in_array($asin,['B08F25FJLQ'])) return true;
     if($sellerId == 'A3I3SZVYDM6YOH' && in_array($asin,['B08FJ9X3F7'])) return true;
     if($sellerId == 'AN5UX6HRRCZZB' && in_array($asin,['B08F25FJLQ'])) return true;
-    if($sellerId == 'A1P441X6YWJXLC' && in_array($asin,['B086V7QBJG'])) return true;
+    if($sellerId == 'A1P441X6YWJXLC' && in_array($asin,['B086V7QBJG','B085YC47R9'])) return true;
     return false;
 }
