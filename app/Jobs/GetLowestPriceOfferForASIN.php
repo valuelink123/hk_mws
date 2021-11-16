@@ -197,16 +197,16 @@ class GetLowestPriceOfferForASIN implements ShouldQueue
                                         'points_number'=>array_get($offer,'Points.PointsNumber'),
                                         'points_monetary_value'=>array_get($offer,'Points.PointsMonetaryValue.Amount'),
                                         'points_monetary_value_currency_code'=>array_get($offer,'Points.PointsMonetaryValue.CurrencyCode'),
-                                        'is_fulfilled_by_amazon'=>array_get($offer,'IsFulfilledByAmazon'),
-                                        'is_buy_box_winner'=>array_get($offer,'IsBuyBoxWinner'),
+                                        'is_fulfilled_by_amazon'=>(array_get($offer,'IsFulfilledByAmazon')=='true')?1:0,
+                                        'is_buy_box_winner'=>(array_get($offer,'IsBuyBoxWinner')=='true')?1:0,
                                         'listing_price'=>array_get($offer,'ListingPrice.Amount'),
                                         'listing_price_currency_code'=>array_get($offer,'ListingPrice.CurrencyCode'),
                                         'shipping'=>array_get($offer,'Shipping.Amount'),
                                         'shipping_currency_code'=>array_get($offer,'Shipping.CurrencyCode'),
-                                        'is_featured_merchant'=>array_get($offer,'IsFeaturedMerchant'),
+                                        'is_featured_merchant'=>(array_get($offer,'IsFeaturedMerchant')=='true')?1:0,
                                         'condition_notes'=>array_get($offer,'ConditionNotes'),
-                                        'is_national_prime'=>array_get($offer,'PrimeInformation.IsNationalPrime'),
-                                        'is_prime'=>array_get($offer,'PrimeInformation.IsPrime'),
+                                        'is_national_prime'=>(array_get($offer,'PrimeInformation.IsNationalPrime')=='true')?1:0,
+                                        'is_prime'=>(array_get($offer,'PrimeInformation.IsPrime')=='true')?1:0,
                                     ]
                                 );
                             }
