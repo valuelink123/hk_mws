@@ -136,7 +136,6 @@ class GetLowestPriceOfferForASIN implements ShouldQueue
                                 foreach($objs->LowestPrice  as $obj){
                                     $lowestPrice = json_decode(json_encode($obj), true);
                                     $lowestPrice=[
-                                        'fulfillment_channel'=>(string)$obj->attributes()->fulfillmentChannel,
                                         'landed_price'=>array_get($lowestPrice,'LandedPrice.Amount'),
                                         'landed_price_currency_code'=>array_get($lowestPrice,'LandedPrice.CurrencyCode'),
                                         'listing_price'=>array_get($lowestPrice,'ListingPrice.Amount'),
@@ -147,6 +146,7 @@ class GetLowestPriceOfferForASIN implements ShouldQueue
                                     AsinOfferLowest::updateOrCreate(
                                         [
                                             'asin_offer_summary_id'=>$result->id,
+                                            'fulfillment_channel'=>(string)$obj->attributes()->fulfillmentChannel
                                         ],
                                         $lowestPrice
                                     );
@@ -185,10 +185,12 @@ class GetLowestPriceOfferForASIN implements ShouldQueue
                                 AsinOffer::updateOrCreate(
                                     [
                                         'asin_offer_summary_id'=>$result->id,
-                                    ],
-                                    [
                                         'seller_id'=>array_get($offer,'SellerId'),
                                         'subcondition'=>array_get($offer,'SubCondition'),
+                                        'is_fulfilled_by_amazon'=>(array_get($offer,'IsFulfilledByAmazon')=='true')?1:0
+                                    ],
+                                    [
+
                                         'seller_positive_feedback_rating'=>round(array_get($offer,'SellerFeedbackRating.SellerPositiveFeedbackRating'),2),
                                         'feedback_count'=>intval(array_get($offer,'SellerFeedbackRating.FeedbackCount')),
                                         'available_date'=>isset($offerObj->ShippingTime->attributes()->availableDate)?(string)$offerObj->ShippingTime->attributes()->availableDate:NULL,
@@ -197,7 +199,6 @@ class GetLowestPriceOfferForASIN implements ShouldQueue
                                         'points_number'=>array_get($offer,'Points.PointsNumber'),
                                         'points_monetary_value'=>array_get($offer,'Points.PointsMonetaryValue.Amount'),
                                         'points_monetary_value_currency_code'=>array_get($offer,'Points.PointsMonetaryValue.CurrencyCode'),
-                                        'is_fulfilled_by_amazon'=>(array_get($offer,'IsFulfilledByAmazon')=='true')?1:0,
                                         'is_buy_box_winner'=>(array_get($offer,'IsBuyBoxWinner')=='true')?1:0,
                                         'listing_price'=>array_get($offer,'ListingPrice.Amount'),
                                         'listing_price_currency_code'=>array_get($offer,'ListingPrice.CurrencyCode'),
