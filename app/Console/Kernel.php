@@ -39,6 +39,7 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\GetProductForAsin',
         'App\Console\Commands\GetPriceForAsin',
         'App\Console\Commands\GetCategoriesForAsin',
+        'App\Console\Commands\GetLowestPriceForAsin',
     ];
 
     /**
@@ -79,6 +80,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('get:product')->twiceDaily(1, 6)->name('GET_PRODUCT')->withoutOverlapping();
         $schedule->command('get:category')->twiceDaily(1, 6)->name('GET_CATEGORY')->withoutOverlapping();
         $schedule->command('get:price')->twiceDaily(1, 6)->name('GET_PRICE')->withoutOverlapping();
+        $schedule->command('get:lowestPrice')->twiceDaily(1, 6)->name('GET_LOWEST_PRICE')->withoutOverlapping();
 		
 		$schedule->command('scan:finances')->dailyAt('5:00')->name('GET_FINANCES')->sendOutputTo($financesLogPath)->withoutOverlapping();
 		
