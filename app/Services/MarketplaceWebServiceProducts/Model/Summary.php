@@ -55,6 +55,7 @@ require_once (dirname(__FILE__) . '/../Model.php');
     'SuggestedLowerPricePlusShipping' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_MoneyType'),
     'BuyBoxEligibleOffers' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_BuyBoxEligibleOffers'),
     'OffersAvailableTime' => array('FieldValue' => null, 'FieldType' => 'string'),
+    'SalesRankings' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_SalesRankList'),
     );
     parent::__construct($data);
     }

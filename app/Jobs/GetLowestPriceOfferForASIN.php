@@ -80,6 +80,7 @@ class GetLowestPriceOfferForASIN implements ShouldQueue
                                 foreach($objs->OfferCount as $obj){
                                     $numberOfOffers[]=[
                                         'fulfillment_channel'=>(string)$obj->attributes()->fulfillmentChannel,
+                                        'condition'=>(string)$obj->attributes()->condition,
                                         'count'=>(int)$obj,
                                     ];
                                 }
@@ -92,6 +93,7 @@ class GetLowestPriceOfferForASIN implements ShouldQueue
                                 foreach($objs->OfferCount as $obj){
                                     $eligibleOffers[]=[
                                         'fulfillment_channel'=>(string)$obj->attributes()->fulfillmentChannel,
+                                        'condition'=>(string)$obj->attributes()->condition,
                                         'count'=>(int)$obj,
                                     ];
                                 }
