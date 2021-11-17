@@ -49,6 +49,7 @@ require_once (dirname(__FILE__) . '/../Model.php');
     public function __construct($data = null)
     {
     $this->_fields = array (
+    'SellerId' => array('FieldValue' => null, 'FieldType' => 'string'),    
     'SubCondition' => array('FieldValue' => null, 'FieldType' => 'string'),
     'SellerFeedbackRating' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_SellerFeedbackType'),
     'ShippingTime' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_DetailedShippingTimeType'),
@@ -59,6 +60,7 @@ require_once (dirname(__FILE__) . '/../Model.php');
     'IsFulfilledByAmazon' => array('FieldValue' => null, 'FieldType' => 'bool'),
     'IsBuyBoxWinner' => array('FieldValue' => null, 'FieldType' => 'bool'),
     'IsFeaturedMerchant' => array('FieldValue' => null, 'FieldType' => 'bool'),
+    'PrimeInformation' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_PrimeInformationType'),
     );
     parent::__construct($data);
     }
