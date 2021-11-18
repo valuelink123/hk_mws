@@ -126,7 +126,7 @@ class GetLowestPriceOfferForASIN implements ShouldQueue
                             [
                                 'asin'=>$asin->asin,
                                 'marketplace_id'=>$account->mws_marketplaceid,
-                                'item_condition'=>'New',
+                                'item_condition'=>'new',
                                 'date'=>$date,
                             ],
                             $summaryData
@@ -148,6 +148,7 @@ class GetLowestPriceOfferForASIN implements ShouldQueue
                                     AsinOfferLowest::updateOrCreate(
                                         [
                                             'asin_offer_summary_id'=>$result->id,
+                                            'condition'=>(string)$obj->attributes()->condition,
                                             'fulfillment_channel'=>(string)$obj->attributes()->fulfillmentChannel
                                         ],
                                         $lowestPrice
@@ -173,6 +174,7 @@ class GetLowestPriceOfferForASIN implements ShouldQueue
                                     AsinOfferBuybox::updateOrCreate(
                                         [
                                             'asin_offer_summary_id'=>$result->id,
+                                            'condition'=>(string)$obj->attributes()->condition,
                                         ],
                                         $buyBoxPrice
                                     );
