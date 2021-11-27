@@ -40,6 +40,8 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\GetPriceForAsin',
         'App\Console\Commands\GetCategoriesForAsin',
         'App\Console\Commands\GetLowestPriceForAsin',
+		'App\Console\Commands\SyncSapAccount',
+		
     ];
 
     /**
@@ -111,6 +113,7 @@ class Kernel extends ConsoleKernel
 		$schedule->command('scan:asins')->everyMinute()->name('GET_ASINS')->sendOutputTo($keepaLogPath)->withoutOverlapping();
 		$schedule->command('get:report')->everyFiveMinutes()->name('GET_REPORTS')->sendOutputTo($reportLogPath)->withoutOverlapping();
 		$schedule->command('scan:payments')->hourly()->name('GET_PAYPAL_PAYMENTS')->sendOutputTo($PaypalLogPath)->withoutOverlapping();
+		$schedule->command('sync:sapAccount')->dailyAt('0:10')->name('SYNC_SAPACCOUNT')->sendOutputTo($SapDataSyncLogPath)->withoutOverlapping();
         $schedule->command('sync:asins')->everyTenMinutes()->name('SYNC_ASINS')->sendOutputTo($SapDataSyncLogPath)->withoutOverlapping();//->twiceDaily(1, 5)
 		$schedule->command('sync:skusite')->dailyAt('0:15')->name('SYNC_SKUSITES')->sendOutputTo($SapDataSyncLogPath)->withoutOverlapping();
 		$schedule->command('sync:skus --afterDate='.date('Y-m-d',strtotime('-1day')).' --beforeDate='.date('Y-m-d',strtotime('+1day')))->twiceDaily(11, 23)->name('SYNC_SKUS')->sendOutputTo($SapDataSyncLogPath)->withoutOverlapping();

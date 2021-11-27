@@ -7,6 +7,6 @@ class SapAccount extends Model {
 
     use  ExtendedMysqlQueries;
     protected $guarded = [];
-    public $timestamps = false;
+    public $timestamps = true;
 
 }
