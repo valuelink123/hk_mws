@@ -107,10 +107,10 @@ class GetOrderItemsForAccount implements ShouldQueue
                         $insertItemData[] = $insertItemArray;
                     }
                     if($insertItemData) OrderItem::insertOnDuplicateWithDeadlockCatching($insertItemData,['asin','seller_sku','purchase_date','fulfillment_channel','title','quantity_ordered','quantity_shipped','gift_wrap_level','gift_message_text','item_price_amount','item_price_currency_code','shipping_price_amount','shipping_price_currency_code','gift_wrap_price_amount','gift_wrap_price_currency_code','item_tax_amount','item_tax_currency_code','shipping_tax_amount','shipping_tax_currency_code','gift_wrap_tax_amount','gift_wrap_tax_currency_code','shipping_discount_amount','shipping_discount_currency_code','promotion_discount_amount','promotion_discount_currency_code','promotion_ids','cod_fee_amount','cod_fee_currency_code','cod_fee_discount_amount','cod_fee_discount_currency_code']);  
-                    $orderUpdate['asins'] = $asins;
-                    $orderUpdate['seller_skus'] = $seller_skus;  
-                    $orderUpdate['vop_flag'] = 1; 
-                    Order::find($order->id)->update($orderUpdate);
+                    $order->asins = $asins;
+                    $order->seller_skus = $seller_skus;  
+                    $order->vop_flag = 1; 
+                    $order->save();
                     $endTime=microtime(true);
                 }
             } catch (MarketplaceWebServiceOrders_Exception $ex) {
