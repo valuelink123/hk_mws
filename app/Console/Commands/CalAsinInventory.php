@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Asin;
 use App\SellerSku;
 use App\SapAsinMatchSku;
+use App\AsinMatchRelation;
 use App\SapSkuSite;
 class CalAsinInventory extends Command
 {
@@ -45,6 +46,7 @@ class CalAsinInventory extends Command
 		$updata=[];
 		foreach($asinStocks as $as){
 			$sku = SapAsinMatchSku::where('asin',array_get($as,'asin',''))->where('marketplace_id',array_get($as,'marketplaceid',''))->where('actived',1)->value('sku');
+			if(!$sku) $sku = AsinMatchRelation::where('asin',array_get($as,'asin',''))->where('marketplace_id',array_get($as,'marketplaceid',''))->value('sku');
 			$stock_where_array = array_get(getMarketplaceCode(),array_get($as,'marketplaceid','').'.fbm_factory_warehouse',[]);
 			$stock_where = [];
 			foreach($stock_where_array as $kfw => $fw){

@@ -15,6 +15,7 @@ use App\SapSkuSite;
 use App\ViewCostOfSku;
 use App\Asin;
 use App\Order;
+use App\AsinMatchRelation;
 class CalculateDailyData extends Command
 {
     /**
@@ -179,14 +180,15 @@ class CalculateDailyData extends Command
 		
         foreach($insertData as $key=>$value){
             $match_asin = array_get($value,'asin');
-			$match_sku_obj = SapAsinMatchSku::where('seller_id',$value['seller_id'])->where('seller_sku',$value['seller_sku'])->where('marketplace_id',$value['marketplace_id'])->where('actived',1);
-            $match_sku_obj = $match_sku_obj->first();
+			$match_sku_obj = SapAsinMatchSku::where('seller_id',$value['seller_id'])->where('seller_sku',$value['seller_sku'])->where('marketplace_id',$value['marketplace_id'])->where('actived',1)->first();
+            if(empty($match_sku_obj)) $match_sku_obj = AsinMatchRelation::where('seller_id',$value['seller_id'])->where('seller_sku',$value['seller_sku'])->where('marketplace_id',$value['marketplace_id'])->first();
+			
 			if(!empty($match_sku_obj)){
 				$match_sku = $match_sku_obj->sku;
 				if(!$match_asin) $match_asin = $match_sku_obj->asin;
 			}else{
-				$match_sku_obj = SapAsinMatchSku::where('seller_sku',$value['seller_sku'])->whereRaw("(marketplace_id='".$value['marketplace_id']."' or seller_id='".$value['seller_id']."')")->where('actived',1);
-				$match_sku_obj = $match_sku_obj->first();
+				$match_sku_obj = SapAsinMatchSku::where('seller_sku',$value['seller_sku'])->whereRaw("(marketplace_id='".$value['marketplace_id']."' or seller_id='".$value['seller_id']."')")->where('actived',1)->first();
+				if(empty($match_sku_obj)) $match_sku_obj = AsinMatchRelation::where('seller_sku',$value['seller_sku'])->whereRaw("(marketplace_id='".$value['marketplace_id']."' or seller_id='".$value['seller_id']."')")->first();
 				if(!empty($match_sku_obj)){
 					$match_sku = $match_sku_obj->sku;
 					if(!$match_asin) $match_asin = $match_sku_obj->asin;

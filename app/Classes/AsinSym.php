@@ -1,6 +1,7 @@
 <?php
 namespace App\Classes;
 use App\SapAsinMatchSku;
+use App\AsinMatchRelation;
 use App\KeywordsTrend;
 class AsinSym {
 
@@ -25,6 +26,9 @@ class AsinSym {
 			'6'=>0.92
 		);
         $asin_info = SapAsinMatchSku::where('asin',$this->asin)->where('marketplace_id',$this->marketplace_id)->where('actived',1)->whereNotNull('sku')->whereNotNull('sku_group')->first();
+		if(empty($asin_info)){
+			$asin_info = AsinMatchRelation::where('asin',$this->asin)->where('marketplace_id',$this->marketplace_id)->whereNotNull('sku')->whereNotNull('sku_group')->first();
+		}
         if(empty($asin_info)) return [];
         $sku = $asin_info->sku;
         $sku_group = $asin_info->sku_group;
